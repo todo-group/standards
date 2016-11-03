@@ -24,3 +24,4 @@ enable_language(C CXX)
 
 add_subdirectory(integrator)
 add_subdirectory(log_sum_exp)
+add_subdirectory(optimize)
