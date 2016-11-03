@@ -22,4 +22,5 @@ message(STATUS "Build type: " ${CMAKE_BUILD_TYPE})
 # enable C and C++ compilers
 enable_language(C CXX)
 
+add_subdirectory(integrator)
 add_subdirectory(log_sum_exp)
