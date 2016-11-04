@@ -1,5 +1,14 @@
-#ifndef INTEGRATOR_HPP
-#define INTEGRATOR_HPP
+/*****************************************************************************
+*
+* Copyright (C) 2016 by Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>
+*
+* Distributed under the Boost Software License, Version 1.0. (See accompanying
+* file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+*
+*****************************************************************************/
+
+#ifndef ODE_INTEGRATOR_HPP
+#define ODE_INTEGRATOR_HPP
 
 #include <string>
 #include <vector>
@@ -90,4 +99,4 @@ private:
 
 } // namespace integrator
 
-#endif // INTEGRATOR_HPP
+#endif // ODE_INTEGRATOR_HPP

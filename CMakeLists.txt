@@ -26,6 +26,6 @@ enable_language(C CXX)
 # enable testing
 include(add_iotest)
 
-add_subdirectory(integrator)
 add_subdirectory(log_sum_exp)
+add_subdirectory(ode)
 add_subdirectory(optimize)
