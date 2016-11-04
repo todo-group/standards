@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 project(standards NONE)
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/config)
 
 set(ALPS_HOME_ENV $ENV{ALPS_HOME})
 if(ALPS_ROOT_DIR OR ALPS_HOME_ENV)
@@ -21,6 +22,9 @@ message(STATUS "Build type: " ${CMAKE_BUILD_TYPE})
 
 # enable C and C++ compilers
 enable_language(C CXX)
+
+# enable testing
+include(add_iotest)
 
 add_subdirectory(integrator)
 add_subdirectory(log_sum_exp)
