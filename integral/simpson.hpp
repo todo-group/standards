@@ -1,11 +1,7 @@
-/*****************************************************************************
-*
-* Copyright (C) 2015-2016 by Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>
-*
-* Distributed under the Boost Software License, Version 1.0. (See accompanying
-* file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
-*
-*****************************************************************************/
+// Copyright (C) 2015-2016 by Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>
+//
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 #ifndef INTEGRAL_SIMPSON_HPP
 #define INTEGRAL_SIMPSON_HPP
@@ -14,8 +10,10 @@
 #include <cmath>
 #include <stdexcept>
 
+namespace integral {
+
 template<typename F>
-double simpson_integration_1d(F const& func, double x0, double x1, unsigned int n) {
+double simpson_1d(F const& func, double x0, double x1, unsigned int n) {
   if (n == 0 || (n % 2) != 0)
     boost::throw_exception(std::invalid_argument("n should be positive and a multiple of two"));
   double dx = (x1 - x0) / n;
@@ -37,7 +35,7 @@ double simpson_integration_1d(F const& func, double x0, double x1, unsigned int 
 }
 
 template<typename F>
-double simpson_integration_2d(F const& func, double x0, double y0, double x1, double y1,
+double simpson_2d(F const& func, double x0, double y0, double x1, double y1,
   unsigned int nx, unsigned int ny) {
   if (nx == 0 || (nx % 2) != 0 || ny == 0 || (ny % 2) != 0)
     boost::throw_exception(std::invalid_argument("nx and ny should be positive and a multiple of two"));
@@ -111,5 +109,7 @@ double simpson_integration_2d(F const& func, double x0, double y0, double x1, do
   g *= dx * dy / 36;
   return g;
 }
+
+} // end namespace integral
 
 #endif // INTEGRAL_SIMPSON_HPP

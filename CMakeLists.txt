@@ -7,6 +7,7 @@ cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 project(standards NONE)
 include(config/core.cmake)
 
+add_subdirectory(integral)
 add_subdirectory(log_sum_exp)
 add_subdirectory(ode)
 add_subdirectory(optimize)
