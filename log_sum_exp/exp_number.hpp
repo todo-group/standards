@@ -205,7 +205,7 @@ public:
   self_& operator*=(self_ const& rhs) {
     log_ += rhs.log_;
     sign_ *= rhs.sign_;
-    if (log_/rhs.log_ < 1.0e-10) log_ = 0;
+    if (std::abs(log_/rhs.log_) < 1.0e-10) log_ = 0;
     return *this;
   }
 
@@ -216,7 +216,7 @@ public:
       if (rhs.sign_ != is_zero) {
         log_ -= rhs.log_;
         sign_ *= rhs.sign_;
-        if (log_/rhs.log_ < 1.0e-10) log_ = 0;
+        if (std::abs(log_/rhs.log_) < 1.0e-10) log_ = 0;
       } else {
         boost::throw_exception(std::range_error("exp_number::operator/=()"));
       }
