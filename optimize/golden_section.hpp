@@ -13,7 +13,6 @@
 #include <algorithm>
 #include <cmath>
 #include <limits>
-#include <boost/throw_exception.hpp>
 
 namespace optimize {
 

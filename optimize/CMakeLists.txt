@@ -1,4 +1,4 @@
-set(PROGS bisection golden_section)
+set(PROGS bisection golden_section nelder_mead)
 foreach(name ${PROGS})
   add_executable(${name} ${name}.cpp)
   add_iotest(${name})
