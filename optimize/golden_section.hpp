@@ -13,41 +13,37 @@
 #include <algorithm>
 #include <cmath>
 #include <limits>
+#include <boost/throw_exception.hpp>
 
 namespace optimize {
+
+// one (or more) local minimum should be included in (x0,x2)
 
 class golden_section {
 public:
   template<class FUNC>
-  unsigned int find_minimum(FUNC& f, double x0, double x1,
+  int find_minimum(FUNC& f, double x0, double x2,
     double prec = std::sqrt(std::numeric_limits<double>::epsilon())) {
-    if (x1 < x0) std::swap(x0, x1);
-    x1 *= (1 + prec);
-    double dx = x1 - x0;
+    if (x2 < x0) std::swap(x0, x2);
     double y0 = f(x0);
-    double y1 = f(x1);
-    double x2, y2;
-    unsigned int counter = 2;
+    double y2 = f(x2);
+    int counter = 2;
     // initial enclosure
-    if (y0 < y1) {
-      // go to the left
-      while (y0 < y1) {
-        ++counter;
-        dx *= 2;
-        x2 = x1; y2 = y1;
-        x1 = x0; y1 = y0;
-        x0 = x1 - dx; y0 = f(x0);
+    double dx = x2 - x0;
+    double x1 = x0 + 0.5 * dx;
+    double y1;
+    while (true) {
+      ++counter;
+      y1 = f(x1);
+      if (y1 < y0 && y1 < y2) break;
+      x1 += dx;
+      if (x1 > x2) {
+        dx *= 0.5;
+        x1 = x0 + 0.5 * dx;
       }
-    } else {
-      // go to the right
-      x2 = x1; y2 = y1;
-      x1 = x0; y1 = y0;
-      while (y2 < y1) {
-        ++counter;
-        dx *= 2;
-        x0 = x1; y0 = y1;
-        x1 = x2; y1 = y2;
-        x2 = x1 + dx; y2 = f(x2);
+      if (counter > 1024) {
+        boost::throw_exception(std::invalid_argument("Initial enclosure failure"));
+        return -1;
       }
     }
     // start golden section

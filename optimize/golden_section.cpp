@@ -17,8 +17,4 @@ int main() {
   int iteration;
   iteration = optimizer.find_minimum(f, 0, 1);
   std::cout << iteration << ' ' << optimizer.minarg() << ' ' << optimizer.minval() << std::endl;
-  iteration = optimizer.find_minimum(f, 1, 2);
-  std::cout << iteration << ' ' << optimizer.minarg() << ' ' << optimizer.minval() << std::endl;
-  iteration = optimizer.find_minimum(f, 2, 3.9034);
-  std::cout << iteration << ' ' << optimizer.minarg() << ' ' << optimizer.minval() << std::endl;
 }

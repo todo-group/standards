@@ -17,14 +17,15 @@
 
 namespace optimize {
 
+// zero(s) should be included in (x0,x1)
+
 class bisection {
 public:
   template<class FUNC>
-  unsigned int find_zero(FUNC& f, double x0, double x1,
+  int find_zero(FUNC& f, double x0, double x1,
     double prec = std::numeric_limits<double>::epsilon()) {
-    unsigned int counter = 0;
-    ++counter;
     double y0 = f(x0);
+    int counter = 1;
     if (y0 == 0) {
       zero_ = x0;
       return counter;
@@ -35,8 +36,10 @@ public:
       zero_ = x1;
       return counter;
     }
-    if (y0 * y1 > 0)
+    if (y0 * y1 > 0) {
       boost::throw_exception(std::invalid_argument("Initial enclosure failure"));
+      return -1;
+    }
     // start bisection
     while (((x1-x0) / std::max(std::abs(x0), std::abs(x1))) > prec ||
            std::max(std::abs(y1), std::abs(y0)) > prec) {
