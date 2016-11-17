@@ -13,33 +13,28 @@
 #include <algorithm>
 #include <cmath>
 #include <limits>
-#include <boost/throw_exception.hpp>
 
 namespace optimize {
 
-// zero(s) should be included in (x0,x1)
-
 class bisection {
 public:
+  // zero(s) should be included in (x0,x1)
   template<class FUNC>
   int find_zero(FUNC& f, double x0, double x1,
     double prec = std::numeric_limits<double>::epsilon()) {
     double y0 = f(x0);
     int counter = 1;
-    if (y0 == 0) {
+    if (std::abs(y0) < prec) {
       zero_ = x0;
       return counter;
     }
     ++counter;
     double y1 = f(x1);
-    if (y1 == 0) {
+    if (std::abs(y1) < prec) {
       zero_ = x1;
       return counter;
     }
-    if (y0 * y1 > 0) {
-      boost::throw_exception(std::invalid_argument("Initial enclosure failure"));
-      return -1;
-    }
+    if (y0 * y1 > 0) return -1;
     // start bisection
     while (((x1-x0) / std::max(std::abs(x0), std::abs(x1))) > prec ||
            std::max(std::abs(y1), std::abs(y0)) > prec) {

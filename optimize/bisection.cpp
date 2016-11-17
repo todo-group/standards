@@ -16,5 +16,9 @@ int main() {
   optimize::bisection optimizer;
   int iteration;
   iteration = optimizer.find_zero(f, 0, 1);
-  std::cout << iteration << ' ' << optimizer.zero() << std::endl;
+  if (iteration < 0) {
+    std::cout << "Initial enclosure failure\n";
+  } else {
+    std::cout << iteration << ' ' << optimizer.zero() << std::endl;
+  }
 }

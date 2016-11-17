@@ -14,7 +14,10 @@ double f(double x) { return 3.293*x*x-5.33*x+3.1; }
 
 int main() {
   optimize::golden_section optimizer;
-  int iteration;
-  iteration = optimizer.find_minimum(f, 0, 1);
-  std::cout << iteration << ' ' << optimizer.minarg() << ' ' << optimizer.minval() << std::endl;
+  int iteration = optimizer.find_minimum(f, 0, 1);
+  if (iteration < 0) {
+    std::cout << "Initial enclosure failure\n";
+  } else {
+    std::cout << iteration << ' ' << optimizer.minarg() << ' ' << optimizer.minval() << std::endl;
+  }
 }

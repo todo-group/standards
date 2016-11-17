@@ -17,10 +17,9 @@
 
 namespace optimize {
 
-// one (or more) local minimum should be included in (x0,x2)
-
 class golden_section {
 public:
+  // one (or more) local minimum should be included in (x0,x2)
   template<class FUNC>
   int find_minimum(FUNC& f, double x0, double x2,
     double prec = std::sqrt(std::numeric_limits<double>::epsilon())) {
@@ -41,10 +40,7 @@ public:
         dx *= 0.5;
         x1 = x0 + 0.5 * dx;
       }
-      if (counter > 1024) {
-        boost::throw_exception(std::invalid_argument("Initial enclosure failure"));
-        return -1;
-      }
+      if (counter > 1024) return -1;
     }
     // start golden section
     double r = (3-std::sqrt(5))/2; // golden ratio
