@@ -11,6 +11,7 @@
 #define LOG_SUM_EXP_EXP_NUMBER_HPP
 
 #include <boost/throw_exception.hpp>
+#include <boost/cstdint.hpp>
 #include <cmath>
 #include <iostream>
 #include <stdexcept>

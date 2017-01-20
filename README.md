@@ -7,6 +7,10 @@
 
 * log_sum_exp: basic arithmetic of huge (or tiny) numbers
 
+* math: mathematical utilities
+
+  * power2, power3, power4, power6 - integral power of a variable
+
 * ode: initial value problem of ordinary differential equations
 
   * integrator::euler - Euler method
@@ -18,3 +22,6 @@
 
   * optimize::bisection - find zero of 1D function by bisection method
   * optimize::golden_section - find (local) minimum of 1D function by golden-secion method
+  * optimize::nelder_mead - find (local) minimum of arbitrary dimansional function by Nelder-Mead method
+
+* stat: statics
