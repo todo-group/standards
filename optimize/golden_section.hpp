@@ -21,7 +21,7 @@ public:
   // one (or more) local minimum should be included in (x0,x2)
   template<class FUNC>
   int find_minimum(FUNC& f, double x0, double x2,
-    double prec = std::sqrt(std::numeric_limits<double>::epsilon())) {
+    double prec = std::sqrt(2 * std::numeric_limits<double>::epsilon())) {
     if (x2 < x0) std::swap(x0, x2);
     double y0 = f(x0);
     double y2 = f(x2);

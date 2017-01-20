@@ -21,7 +21,8 @@ class nelder_mead {
 public:
   template<class FUNC>
   int find_minimum(FUNC& f, std::vector<double> x0, double shift = 0.1,
-    double prec = std::sqrt(std::numeric_limits<double>::epsilon())) {
+    double prec = 2 * std::numeric_limits<double>::epsilon(),
+    int max_iteration = 1024) {
     int n = x0.size();
     x.resize(n+1);
     for (int i = 0; i < n+1; ++i) x[i].resize(n);
@@ -102,9 +103,10 @@ public:
       // convergence check
       double diff2 = 0.0;
       for (int j = 0; j < n; ++j) diff2 += (x[n][j] - x[0][j]) * (x[n][j] - x[0][j]);
-      if (diff2 < prec && std::abs(y[n] - y[0]) < prec * std::max(std::abs(y[n]), std::abs(y[0]))) {
+      if (diff2 < prec || std::abs(y[n] - y[0]) < prec * std::max(std::abs(y[n]), std::abs(y[0]))) {
         return counter;
       }
+      if (counter > max_iteration) return -2;
     }
   }
   std::vector<double> const& minarg() const { return x[0]; }

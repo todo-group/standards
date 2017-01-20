@@ -9,18 +9,20 @@
 
 #include <iostream>
 #include "nelder_mead.hpp"
-
-double f(std::vector<double> const& x) {
-  double r2 = (x[0]*x[0] + x[1]*x[1]);
-  return -10*r2 + r2*r2 - 2*(x[0]+x[1]);
-}
+#include "mccormick.hpp"
 
 int main() {
   optimize::nelder_mead optimizer;
   std::vector<double> x(2);
-  x[0] = -15.0;
-  x[1] = 3.0;
+  x[0] = 1;
+  x[1] = -1;
+  optimize::mccormick f;
   int iteration = optimizer.find_minimum(f, x);
-  x = optimizer.minarg();
-  std::cout << iteration << ' ' << optimizer.minval() << " at [" << x[0] << "," << x[1] << "]\n";
+  if (iteration < 0) {
+    std::cerr << "Failed to converge\n";
+  } else {
+    x = optimizer.minarg();
+    std::cout << iteration << ' ' << optimizer.minval()
+              << " at [" << x[0] << "," << x[1] << "]\n";
+  }
 }

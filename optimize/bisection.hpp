@@ -21,7 +21,7 @@ public:
   // zero(s) should be included in (x0,x1)
   template<class FUNC>
   int find_zero(FUNC& f, double x0, double x1,
-    double prec = std::numeric_limits<double>::epsilon()) {
+    double prec = 2 * std::numeric_limits<double>::epsilon()) {
     double y0 = f(x0);
     int counter = 1;
     if (std::abs(y0) < prec) {
