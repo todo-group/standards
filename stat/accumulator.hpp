@@ -10,7 +10,7 @@
 #define STAT_ACCUMULATOR_HPP
 
 #include <math/power.hpp>
-#include <stat/cumulant.hpp>
+#include <stat/moment.hpp>
 
 #include <boost/lexical_cast.hpp>
 #include <cmath>
@@ -21,13 +21,15 @@
 
 namespace stat {
 
-using math::power2;
-using math::power3;
-using math::power4;
+using math::p2;
+using math::p3;
+using math::p4;
  
-class accumulator {
+class accumulator : public moment<accumulator> {
+private:
+  typedef moment<accumulator> super_type;
 public:
-  accumulator(std::string const& name = "") : name_(name) { reset(); }
+  accumulator(std::string const& name = "") : super_type(*this), name_(name) { reset(); }
   void reset() {
     count_ = 0;
     sum1_ = sum2_ = sum3_ = sum4_ = 0;
@@ -35,9 +37,9 @@ public:
   double operator<<(double v) {
     ++count_;
     sum1_ += v;
-    sum2_ += power2(v);
-    sum3_ += power3(v);
-    sum4_ += power4(v);
+    sum2_ += p2(v);
+    sum3_ += p3(v);
+    sum4_ += p4(v);
     return v;
   }
 
@@ -48,41 +50,23 @@ public:
   double moment3() const { return count() ? (sum3_ / count()) : 0; }
   double moment4() const { return count() ? (sum4_ / count()) : 0; }
 
-  double cumulant1_s() const { return moment1(); }
-  double cumulant2_s() const { return moment2() - power2(moment1()); }
-  double cumulant3_s() const {
-    return moment3() - 3 * moment2() * moment1() + 2 * power3(moment1());
-  }
-  double cumulant4_s() const {
-    return moment4() - 4 * moment3() * moment1() - 3 * power2(moment2())
-      + 12 * moment2() * power2(moment1()) - 6 * power4(moment1());
-  }
-  double cumulant1() const { return cumulant1_s(); }
-  double cumulant2() const {
+  double central_moment1() const { return 0; }
+  double central_moment2() const {
     double n = count();
-    return (n > 1) ? (n/(n-1)) * cumulant2_s() : 0;
+    return (n > 1) ? (n/(n-1)) * super_type::central_moment2() : 0;
   }
-  double cumulant3() const {
+  double central_moment3() const {
     double n = count();
-    return (n > 2) ? (power2(n)/((n-2)*(n-1))) * cumulant3_s() : 0;
+    return (n > 2) ? (n*n/((n-2)*(n-1))) * super_type::central_moment3() : 0;
   }
-  double cumulant4() const {
+  double central_moment4() const {
     double n = count();
     return (n > 1) ?
-      // (n/(n-1)) * ((n*n/(n*n-3*n+3)) * cumulant4_s() - ((6*n-9)/(n*n-3*n+3)) * cumulant2_s()) : 0;
-      
-      (n/(n-1)) * ((n*n/(n*n-3*n+3)) * cumulant4_s()) - ((6*n-9)/((n*n-3*n+3))) * power2(cumulant2()) : 0;
+      (p2(n)/(p3(n-1)*(p2(n)-3*n+3)))*((n*p2(n-1)+(6*n-9)) * super_type::central_moment4()
+                                       - n*(6*n-9)*p2(super_type::central_moment2())) : 0;
   }
-  
-  double mean() const { return cumulant1(); }
-  double variance() const { return cumulant2(); }
-  double standard_deviation() const { return std::sqrt(variance()); }
-  double skewness() const { return (count() > 1) ? cumulant3() / power3(standard_deviation()) : 0; }
-  double kurtosis() const { return (count() > 1) ? cumulant4() / power4(standard_deviation()) : 0; }
-  
-  double average() const { return mean(); }
-  double error() const { return count() ? std::sqrt(variance() / count()) : 0; }
-  
+  double average() const { return super_type::mean(); }
+  double error() const { return count() ? std::sqrt(super_type::variance() / count()) : 0; }
 private:
   std::string name_;
   unsigned long count_;

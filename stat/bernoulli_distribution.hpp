@@ -6,27 +6,27 @@
 #ifndef STAT_BERNOULLI_DISTRIBUTION_HPP
 #define STAT_BERNOULLI_DISTRIBUTION_HPP
 
-#include <math/power.hpp>
-#include <stat/cumulant.hpp>
+#include <stat/moment.hpp>
 
+#include <boost/lexical_cast.hpp>
 #include <cmath>
+#include <string>
 
 #include <boost/throw_exception.hpp>
 #include <stdexcept>
 
 namespace stat {
 
-using math::power2;
-using math::power3;
-using math::power4;
-  
-class bernoulli_distribution : public cumulant<bernoulli_distribution> {
+class bernoulli_distribution : public moment<bernoulli_distribution> {
 private:
-  typedef cumulant<bernoulli_distribution> super_type;
+  typedef moment<bernoulli_distribution> super_type;
 public:
   bernoulli_distribution(double p) : super_type(*this), p_(p) {
     if (p < 0 || p >1)
       boost::throw_exception(std::invalid_argument("stat::bernoulli_distribution"));
+  }
+  std::string name() const {
+    return "Bernoulli Distribution: Be(" + boost::lexical_cast<std::string>(p_) + ")";
   }
   double moment1() const { return p_; }
   double moment2() const { return p_; }

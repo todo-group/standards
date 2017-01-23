@@ -16,10 +16,10 @@ try {
 #endif
 
   unsigned long count = 65536;
-  unsigned long mmax = 64;
+  unsigned long mmax = 1024;
   unsigned long seed = 12345;
 
-  double p = 0.6;
+  double p = 0.75;
 
   std::cout << "[test for normal distribution]\n";
 
@@ -28,8 +28,13 @@ try {
     rng(engine, boost::bernoulli_distribution<>(p));
 
   stat::bernoulli_distribution dist(p);
-  test::run(dist, rng, count, mmax);
-  
+
+  std::cout << "[[series of random numbers]]\n";
+  for (int i = 0; i < 4; ++i) std::cout << rng() << std::endl;
+
+  test1(dist, rng, count);
+  test2(dist, rng, count, mmax);
+
 #ifndef BOOST_NO_EXCEPTIONS
 }
 catch (std::exception& exc) {

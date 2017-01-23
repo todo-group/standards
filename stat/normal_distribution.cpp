@@ -16,10 +16,10 @@ try {
 #endif
 
   unsigned long count = 65536;
-  unsigned long mmax = 64;
+  unsigned long mmax = 1024;
   unsigned long seed = 12345;
 
-  double mu = 2.4;
+  double mu = 2.0;
   double sigma = 1.5;
 
   std::cout << "[test for normal distribution]\n";
@@ -30,8 +30,12 @@ try {
 
   stat::normal_distribution dist(mu, sigma);
 
-  test::run(dist, rng, count, mmax);
-  
+  std::cout << "[[series of random numbers]]\n";
+  for (int i = 0; i < 4; ++i) std::cout << rng() << std::endl;
+
+  test1(dist, rng, count);
+  test2(dist, rng, count, mmax);
+
 #ifndef BOOST_NO_EXCEPTIONS
 }
 catch (std::exception& exc) {
