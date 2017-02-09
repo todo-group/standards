@@ -25,3 +25,5 @@
   * optimize::nelder_mead - find (local) minimum of arbitrary dimansional function by Nelder-Mead method
 
 * stat: statics
+
+  * stat::accumulator - estimate central moments and cumulants of random samples

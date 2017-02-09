@@ -4,7 +4,8 @@
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 // Ref: http://modelingwithdata.org/pdfs/moments.pdf
-// Ref: wrn:2017-01-20
+// Ref: standards/doc/stat/fourth-moment.pdf
+// Ref: wrn:2017-01-20, 2017-02-07, 2017-02-09
 
 #ifndef STAT_ACCUMULATOR_HPP
 #define STAT_ACCUMULATOR_HPP
