@@ -57,13 +57,21 @@ public:
   }
   double central_moment3() const {
     double n = count();
-    return (n > 2) ? (n*n/((n-2)*(n-1))) * super_type::central_moment3() : 0;
+    return (n > 2) ? (n*n/((n-1)*(n-2))) * super_type::central_moment3() : 0;
   }
   double central_moment4() const {
     double n = count();
-    return (n > 1) ?
-      (p2(n)/(p3(n-1)*(p2(n)-3*n+3)))*((n*p2(n-1)+(6*n-9)) * super_type::central_moment4()
-                                       - n*(6*n-9)*p2(super_type::central_moment2())) : 0;
+    return (n > 3) ?
+      n/((n-1)*(n-2)*(n-3)) *
+      ((p2(n)-2*n+3)*super_type::central_moment4() -
+       (6*n-9)*(p2(moment2()) - 2 * p2(moment1()) * moment2() + p4(moment1()))) : 0;
+  }
+  double cumulant4() const {
+    double n = count();
+    return (n > 3) ?
+      p2(n)/((n-1)*(n-2)*(n-3)) *
+      ((n+1)*super_type::central_moment4() -
+       3*(n-1)*(p2(moment2()) - 2 * p2(moment1()) * moment2() + p4(moment1()))) : 0;
   }
   double average() const { return super_type::mean(); }
   double error() const { return count() ? std::sqrt(super_type::variance() / count()) : 0; }

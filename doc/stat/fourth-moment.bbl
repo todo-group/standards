@@ -1,0 +1,15 @@
+\begin{thebibliography}{1}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\providecommand{\bibinfo}[2]{#2}
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem{Klements2009}
+\bibinfo{author}{Klements, B.}
+\newblock \emph{\bibinfo{title}{Modeling with Data: Tools and Techniques for
+  Scientific Computing}} (\bibinfo{publisher}{Princeton University Press},
+  \bibinfo{address}{Princeton}, \bibinfo{year}{2009}).
+\newblock \urlprefix\url{http://modelingwithdata.org}.
+
+\end{thebibliography}

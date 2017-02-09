@@ -35,6 +35,7 @@ try {
 
   test1(dist, rng, count);
   test2(dist, rng, count, mmax);
+  test3(dist, rng, count, mmax);
 
 #ifndef BOOST_NO_EXCEPTIONS
 }
