@@ -88,6 +88,11 @@ inline std::string format(accumulator const& accum) {
     + boost::lexical_cast<std::string>(accum.error());
 }
 
+inline std::ostream& operator<<(std::ostream& os, accumulator const& accum) {
+  os << accum.name() << " = " << accum.average() << " +- " << accum.error();
+  return os;
+}
+
 } // end namespace stat
 
 #endif // STAT_ACCUMULATOR_HPP
