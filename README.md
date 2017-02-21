@@ -5,7 +5,7 @@
   * integral::simpson_1d - 1D Integration by Simpson rule
   * integral::simpson_2d - 2D Integration by Simpson rule
 
-* log_sum_exp: basic arithmetic of huge (or tiny) numbers
+* lse: basic arithmetic of huge (or tiny) numbers based on log-sum-exp technique
 
 * math: mathematical utilities
 

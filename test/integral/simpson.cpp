@@ -5,7 +5,7 @@
 
 #include <cmath>
 #include <iostream>
-#include "simpson.hpp"
+#include <integral/simpson.hpp>
 
 double func1(double x) { return std::sin(x); }
 double func2(double x, double y) { return std::sin(x) * std::sin(y); }

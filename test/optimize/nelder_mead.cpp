@@ -8,16 +8,21 @@
 *****************************************************************************/
 
 #include <iostream>
-#include "golden_section.hpp"
-
-double f(double x) { return 3.293*x*x-5.33*x+3.1; }
+#include <optimize/nelder_mead.hpp>
+#include <optimize/mccormick.hpp>
 
 int main() {
-  optimize::golden_section optimizer;
-  int iteration = optimizer.find_minimum(f, 0, 1);
+  optimize::nelder_mead optimizer;
+  std::vector<double> x(2);
+  x[0] = 1;
+  x[1] = -1;
+  optimize::mccormick f;
+  int iteration = optimizer.find_minimum(f, x);
   if (iteration < 0) {
-    std::cout << "Initial enclosure failure\n";
+    std::cerr << "Failed to converge\n";
   } else {
-    std::cout << iteration << ' ' << optimizer.minarg() << ' ' << optimizer.minval() << std::endl;
+    x = optimizer.minarg();
+    std::cout << iteration << ' ' << optimizer.minval()
+              << " at [" << x[0] << "," << x[1] << "]\n";
   }
 }

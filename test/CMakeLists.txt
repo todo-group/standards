@@ -1,0 +1,5 @@
+add_subdirectory(integral)
+add_subdirectory(lse)
+add_subdirectory(ode)
+add_subdirectory(optimize)
+add_subdirectory(stat)

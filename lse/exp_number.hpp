@@ -7,8 +7,8 @@
 *
 *****************************************************************************/
 
-#ifndef LOG_SUM_EXP_EXP_NUMBER_HPP
-#define LOG_SUM_EXP_EXP_NUMBER_HPP
+#ifndef LSE_EXP_NUMBER_HPP
+#define LSE_EXP_NUMBER_HPP
 
 #include <boost/throw_exception.hpp>
 #include <boost/cstdint.hpp>
@@ -21,7 +21,7 @@
 # include <alps/osiris/dump.h>
 #endif
 
-namespace log_sum_exp {
+namespace lse {
 
 namespace detail {
     
@@ -275,7 +275,7 @@ inline exp_number<double> exp_value(double v) {
 } // end namespace exp_number
 
 #ifndef BOOST_NO_OPERATORS_IN_NAMESPACE
-namespace log_sum_exp {
+namespace lse {
 #endif
 
 //
@@ -283,8 +283,8 @@ namespace log_sum_exp {
 //
 
 template<typename T>
-bool operator>(T x, log_sum_exp::exp_number<T> const& y) {
-  return (log_sum_exp::exp_number<T>(x) > y);
+bool operator>(T x, lse::exp_number<T> const& y) {
+  return (lse::exp_number<T>(x) > y);
 }
 
 //
@@ -292,8 +292,8 @@ bool operator>(T x, log_sum_exp::exp_number<T> const& y) {
 //
 
 template<typename T, typename U>
-bool operator==(T x, log_sum_exp::exp_number<T> const& y) {
-  return (log_sum_exp::exp_number<T>(x) == y);
+bool operator==(T x, lse::exp_number<T> const& y) {
+  return (lse::exp_number<T>(x) == y);
 }
 
 //
@@ -301,16 +301,16 @@ bool operator==(T x, log_sum_exp::exp_number<T> const& y) {
 //
 
 template<typename T, typename U>
-bool operator>=(log_sum_exp::exp_number<T> const& x, log_sum_exp::exp_number<U> const& y) {
+bool operator>=(lse::exp_number<T> const& x, lse::exp_number<U> const& y) {
   return (x > y) || (x == y);
 }
 template<typename T, typename U>
-bool operator>=(log_sum_exp::exp_number<T> const& x, U y) {
+bool operator>=(lse::exp_number<T> const& x, U y) {
   return (x > y) || (x == y);
 }
 template<typename T, typename U>
-bool operator>=(U x, log_sum_exp::exp_number<T> const& y) {
-  log_sum_exp::exp_number<T> lhs(x);
+bool operator>=(U x, lse::exp_number<T> const& y) {
+  lse::exp_number<T> lhs(x);
   return (lhs > y) || (lhs == y);
 }
 
@@ -319,15 +319,15 @@ bool operator>=(U x, log_sum_exp::exp_number<T> const& y) {
 //
 
 template<typename T, typename U>
-bool operator<(log_sum_exp::exp_number<T> const& x, log_sum_exp::exp_number<U> const& y) {
+bool operator<(lse::exp_number<T> const& x, lse::exp_number<U> const& y) {
   return (y > x);
 }
 template<typename T, typename U>
-bool operator<(log_sum_exp::exp_number<T> const& x, U y) {
+bool operator<(lse::exp_number<T> const& x, U y) {
   return (y > x);
 }
 template<typename T, typename U>
-bool operator<(U x, log_sum_exp::exp_number<T> const& y) {
+bool operator<(U x, lse::exp_number<T> const& y) {
   return (y > x);
 }
 
@@ -336,16 +336,16 @@ bool operator<(U x, log_sum_exp::exp_number<T> const& y) {
 //
 
 template<typename T, typename U>
-bool operator<=(log_sum_exp::exp_number<T> const& x, log_sum_exp::exp_number<U> const& y) {
+bool operator<=(lse::exp_number<T> const& x, lse::exp_number<U> const& y) {
   return (y >= x);
 }
 template<typename T, typename U>
-bool operator<=(log_sum_exp::exp_number<T> const& x, U y) {
-  log_sum_exp::exp_number<T> z = y;
+bool operator<=(lse::exp_number<T> const& x, U y) {
+  lse::exp_number<T> z = y;
   return (z >= x);
 }
 template<typename T, typename U>
-bool operator<=(U x, log_sum_exp::exp_number<T> const& y) {
+bool operator<=(U x, lse::exp_number<T> const& y) {
   return (y >= x);
 }
 
@@ -354,22 +354,22 @@ bool operator<=(U x, log_sum_exp::exp_number<T> const& y) {
 //
 
 template<typename T, typename U>
-log_sum_exp::exp_number<typename log_sum_exp::detail::fp_promotion_traits<T, U>::type>
-operator+(log_sum_exp::exp_number<T> const& x, log_sum_exp::exp_number<U> const& y) {
-  typedef typename log_sum_exp::detail::fp_promotion_traits<T, U>::type value_type;
-  log_sum_exp::exp_number<value_type> res = x;
+lse::exp_number<typename lse::detail::fp_promotion_traits<T, U>::type>
+operator+(lse::exp_number<T> const& x, lse::exp_number<U> const& y) {
+  typedef typename lse::detail::fp_promotion_traits<T, U>::type value_type;
+  lse::exp_number<value_type> res = x;
   res += y;
   return res;
 }
 template<typename T, typename U>
-log_sum_exp::exp_number<T> operator+(log_sum_exp::exp_number<T> const& x, U y) {
-  log_sum_exp::exp_number<T> res = x;
+lse::exp_number<T> operator+(lse::exp_number<T> const& x, U y) {
+  lse::exp_number<T> res = x;
   res += y;
   return res;
 }
 template<typename T, typename U>
-log_sum_exp::exp_number<T> operator+(U x, log_sum_exp::exp_number<T> const& y) {
-  log_sum_exp::exp_number<T> res = x;
+lse::exp_number<T> operator+(U x, lse::exp_number<T> const& y) {
+  lse::exp_number<T> res = x;
   res += y;
   return res;
 }
@@ -379,22 +379,22 @@ log_sum_exp::exp_number<T> operator+(U x, log_sum_exp::exp_number<T> const& y) {
 //
 
 template<typename T, typename U>
-log_sum_exp::exp_number<typename log_sum_exp::detail::fp_promotion_traits<T, U>::type>
-operator-(log_sum_exp::exp_number<T> const& x, log_sum_exp::exp_number<U> const& y) {
-  typedef typename log_sum_exp::detail::fp_promotion_traits<T, U>::type value_type;
-  log_sum_exp::exp_number<value_type> res = x;
+lse::exp_number<typename lse::detail::fp_promotion_traits<T, U>::type>
+operator-(lse::exp_number<T> const& x, lse::exp_number<U> const& y) {
+  typedef typename lse::detail::fp_promotion_traits<T, U>::type value_type;
+  lse::exp_number<value_type> res = x;
   res -= y;
   return res;
 }
 template<typename T, typename U>
-log_sum_exp::exp_number<T> operator-(log_sum_exp::exp_number<T> const& x, U y) {
-  log_sum_exp::exp_number<T> res = x;
+lse::exp_number<T> operator-(lse::exp_number<T> const& x, U y) {
+  lse::exp_number<T> res = x;
   res -= y;
   return res;
 }
 template<typename T, typename U>
-log_sum_exp::exp_number<T> operator-(U x, log_sum_exp::exp_number<T> const& y) {
-  log_sum_exp::exp_number<T> res = x;
+lse::exp_number<T> operator-(U x, lse::exp_number<T> const& y) {
+  lse::exp_number<T> res = x;
   res -= y;
   return res;
 }
@@ -404,22 +404,22 @@ log_sum_exp::exp_number<T> operator-(U x, log_sum_exp::exp_number<T> const& y) {
 //
 
 template<typename T, typename U>
-log_sum_exp::exp_number<typename log_sum_exp::detail::fp_promotion_traits<T, U>::type>
-operator*(log_sum_exp::exp_number<T> const& x, log_sum_exp::exp_number<U> const& y) {
-  typedef typename log_sum_exp::detail::fp_promotion_traits<T, U>::type value_type;
-  log_sum_exp::exp_number<value_type> res = x;
+lse::exp_number<typename lse::detail::fp_promotion_traits<T, U>::type>
+operator*(lse::exp_number<T> const& x, lse::exp_number<U> const& y) {
+  typedef typename lse::detail::fp_promotion_traits<T, U>::type value_type;
+  lse::exp_number<value_type> res = x;
   res *= y;
   return res;
 }
 template<typename T, typename U>
-log_sum_exp::exp_number<T> operator*(log_sum_exp::exp_number<T> const& x, U y) {
-  log_sum_exp::exp_number<T> res = x;
+lse::exp_number<T> operator*(lse::exp_number<T> const& x, U y) {
+  lse::exp_number<T> res = x;
   res *= y;
   return res;
 }
 template<typename T, typename U>
-log_sum_exp::exp_number<T> operator*(U x, log_sum_exp::exp_number<T> const& y) {
-  log_sum_exp::exp_number<T> res = y;
+lse::exp_number<T> operator*(U x, lse::exp_number<T> const& y) {
+  lse::exp_number<T> res = y;
   res *= x;
   return res;
 }
@@ -429,28 +429,28 @@ log_sum_exp::exp_number<T> operator*(U x, log_sum_exp::exp_number<T> const& y) {
 //
 
 template<typename T, typename U>
-log_sum_exp::exp_number<typename log_sum_exp::detail::fp_promotion_traits<T, U>::type>
-operator/(log_sum_exp::exp_number<T> const& x, log_sum_exp::exp_number<U> const& y) {
-  typedef typename log_sum_exp::detail::fp_promotion_traits<T, U>::type value_type;
-  log_sum_exp::exp_number<value_type> res = x;
+lse::exp_number<typename lse::detail::fp_promotion_traits<T, U>::type>
+operator/(lse::exp_number<T> const& x, lse::exp_number<U> const& y) {
+  typedef typename lse::detail::fp_promotion_traits<T, U>::type value_type;
+  lse::exp_number<value_type> res = x;
   res /= y;
   return res;
 }
 template<typename T, typename U>
-log_sum_exp::exp_number<T> operator/(log_sum_exp::exp_number<T> const& x, U y) {
-  log_sum_exp::exp_number<T> res = x;
+lse::exp_number<T> operator/(lse::exp_number<T> const& x, U y) {
+  lse::exp_number<T> res = x;
   res /= y;
   return res;
 }
 template<typename T, typename U>
-log_sum_exp::exp_number<T> operator/(U x, log_sum_exp::exp_number<T> const& y) {
-  log_sum_exp::exp_number<T> res = x;
+lse::exp_number<T> operator/(U x, lse::exp_number<T> const& y) {
+  lse::exp_number<T> res = x;
   res /= y;
   return res;
 }
 
 template<typename T>
-std::ostream& operator<<(std::ostream& os, log_sum_exp::exp_number<T> const& x) {
+std::ostream& operator<<(std::ostream& os, lse::exp_number<T> const& x) {
   if (x > 0)
     os << "exp(" << log(x) << ')';
   else if (x < 0)
@@ -463,13 +463,13 @@ std::ostream& operator<<(std::ostream& os, log_sum_exp::exp_number<T> const& x) 
 #ifndef ALPS_INDEP_SOURCE
 
 template<typename T>
-alps::ODump& operator<<(alps::ODump& dp, log_sum_exp::exp_number<T> const& x) {
+alps::ODump& operator<<(alps::ODump& dp, lse::exp_number<T> const& x) {
   x.save(dp);
   return dp;
 }
 
 template<typename T>
-alps::IDump& operator>>(alps::IDump& dp, log_sum_exp::exp_number<T>& x) {
+alps::IDump& operator>>(alps::IDump& dp, lse::exp_number<T>& x) {
   x.load(dp);
   return dp;
 }
@@ -477,7 +477,7 @@ alps::IDump& operator>>(alps::IDump& dp, log_sum_exp::exp_number<T>& x) {
 #endif
 
 #ifndef BOOST_NO_OPERATORS_IN_NAMESPACE
-} // namespace log_sum_exp
+} // namespace lse
 #endif
 
-#endif // LOG_SUM_EXP_EXP_NUMBER_H
+#endif // LSE_EXP_NUMBER_H

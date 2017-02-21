@@ -8,9 +8,9 @@
 *****************************************************************************/
 
 #include <iostream>
-#include "exp_number.hpp"
+#include <lse/exp_number.hpp>
 
-using namespace log_sum_exp;
+using namespace lse;
 
 int main() {
 #ifndef BOOST_NO_EXCEPTIONS

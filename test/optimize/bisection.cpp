@@ -8,7 +8,7 @@
 *****************************************************************************/
 
 #include <iostream>
-#include "bisection.hpp"
+#include <optimize/bisection.hpp>
 
 double f(double x) { return 3.293*x*x-5.33*x+1; }
 

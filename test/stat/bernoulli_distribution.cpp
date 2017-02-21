@@ -4,8 +4,8 @@
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 #include <stat/accumulator.hpp>
-#include <stat/normal_distribution.hpp>
-#include <stat/test.hpp>
+#include <stat/bernoulli_distribution.hpp>
+#include "test.hpp"
 
 #include <boost/random.hpp>
 #include <iostream>
@@ -19,16 +19,15 @@ try {
   unsigned long mmax = 1024;
   unsigned long seed = 12345;
 
-  double mu = 2.0;
-  double sigma = 1.5;
+  double p = 0.75;
 
   std::cout << "[test for normal distribution]\n";
 
   boost::mt19937 engine(seed);
-  boost::variate_generator<boost::mt19937&, boost::normal_distribution<> >
-    rng(engine, boost::normal_distribution<>(mu, sigma));
+  boost::variate_generator<boost::mt19937&, boost::bernoulli_distribution<> >
+    rng(engine, boost::bernoulli_distribution<>(p));
 
-  stat::normal_distribution dist(mu, sigma);
+  stat::bernoulli_distribution dist(p);
 
   std::cout << "[[series of random numbers]]\n";
   for (int i = 0; i < 4; ++i) std::cout << rng() << std::endl;
