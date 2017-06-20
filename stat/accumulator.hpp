@@ -31,6 +31,8 @@ private:
   typedef moment<accumulator> super_type;
 public:
   accumulator(std::string const& name = "") : super_type(*this), name_(name) { reset(); }
+  accumulator(accumulator const& x) : super_type(*this), name_(x.name_),
+    count_(x.count_), sum1_(x.sum1_), sum2_(x.sum2_), sum3_(x.sum3_), sum4_(x.sum4_) {}
   void reset() {
     count_ = 0;
     sum1_ = sum2_ = sum3_ = sum4_ = 0;
@@ -44,6 +46,7 @@ public:
     return v;
   }
 
+  void set_name(std::string const& name) { name_ = name; }
   std::string name() const { return name_; }
   unsigned long count() const { return count_; }
   double moment1() const { return count() ? (sum1_ / count()) : 0; }
