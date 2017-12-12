@@ -1,15 +1,24 @@
 # Standard Algorithms
 
+* config: standard configuration for CMake
+
 * integral: numerical integration
 
   * integral::simpson_1d - 1D Integration by Simpson rule
   * integral::simpson_2d - 2D Integration by Simpson rule
 
-* lse: basic arithmetic of huge (or tiny) numbers based on log-sum-exp technique
+* lattice: simple lattices
+
+  * lattice::square - square lattice
+  * lattice::simple_cubic - simple cubic lattice
+
+* lse: basic arithmetic of huge (or tiny) numbers based
+  on log-sum-exp technique
 
 * math: mathematical utilities
 
-  * power2, power3, power4, power6 - integral power of a variable
+  * power2, power3, power4, power6 - integral power of 
+    a variable
 
 * ode: initial value problem of ordinary differential equations
 
