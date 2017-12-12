@@ -6,6 +6,7 @@
 #ifndef LATTICE_SIMPLE_CUBIC_HPP
 #define LATTICE_SIMPLE_CUBIC_HPP
 
+#include <boost/array.hpp>
 #include <boost/tuple/tuple.hpp>
 #include <vector>
 
