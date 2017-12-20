@@ -9,8 +9,10 @@
 
 * lattice: simple lattices
 
-  * lattice::square - square lattice
-  * lattice::simple_cubic - simple cubic lattice
+  * lattice::chain - 1D chain lattice
+  * lattice::square - 2D square lattice
+  * lattice::cubic - 3D simple cubic lattice
+  * lattice::fully_connected - (infinite-D) fully-connected lattice
 
 * lse: basic arithmetic of huge (or tiny) numbers based
   on log-sum-exp technique

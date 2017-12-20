@@ -1,4 +1,4 @@
-set(PROGS chain square cubic)
+set(PROGS chain square cubic fully_connected)
 foreach(name ${PROGS})
   add_executable(${name} ${name}.cpp)
   add_iotest(${name})
