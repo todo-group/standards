@@ -10,15 +10,13 @@
 #ifndef STAT_ACCUMULATOR_HPP
 #define STAT_ACCUMULATOR_HPP
 
-#include <math/power.hpp>
-#include <stat/moment.hpp>
-
-#include <boost/lexical_cast.hpp>
 #include <cmath>
-#include <string>
-
-#include <boost/throw_exception.hpp>
 #include <stdexcept>
+#include <string>
+#include <boost/lexical_cast.hpp>
+#include <boost/throw_exception.hpp>
+#include "moment.hpp"
+#include "power.hpp"
 
 namespace stat {
 

@@ -1,4 +1,4 @@
-set(PROGS square simple_cubic)
+set(PROGS chain square cubic)
 foreach(name ${PROGS})
   add_executable(${name} ${name}.cpp)
   add_iotest(${name})

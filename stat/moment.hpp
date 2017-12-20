@@ -6,8 +6,8 @@
 #ifndef STAT_MOMENT_HPP
 #define STAT_MOMENT_HPP
 
-#include <math/power.hpp>
 #include <cmath>
+#include <power.hpp>
 
 namespace stat {
 

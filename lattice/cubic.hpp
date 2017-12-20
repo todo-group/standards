@@ -3,19 +3,19 @@
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef LATTICE_SIMPLE_CUBIC_HPP
-#define LATTICE_SIMPLE_CUBIC_HPP
+#ifndef LATTICE_CUBIC_HPP
+#define LATTICE_CUBIC_HPP
 
+#include <vector>
 #include <boost/array.hpp>
 #include <boost/tuple/tuple.hpp>
-#include <vector>
 
 namespace lattice {
 
-class simple_cubic {
+class cubic {
 public:
-  simple_cubic(unsigned int L) : length_x_(L), length_y_(L), length_z_(L) { init(); }
-  simple_cubic(unsigned int Lx, unsigned int Ly, unsigned int Lz) :
+  cubic(unsigned int L) : length_x_(L), length_y_(L), length_z_(L) { init(); }
+  cubic(unsigned int Lx, unsigned int Ly, unsigned int Lz) :
     length_x_(Lx), length_y_(Ly), length_z_(Lz) { init(); }
   void init() {
     neighbors_.resize(num_sites());
@@ -90,4 +90,4 @@ private:
 
 } // end namespace lattice
 
-#endif // LATTICE_SIMPLE_CUBIC_HPP
+#endif // LATTICE_CUBIC_HPP

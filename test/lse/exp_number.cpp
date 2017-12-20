@@ -1,21 +1,16 @@
-/*****************************************************************************
-*
-* Copyright (C) 1997-2016 by Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>
-*
-* Distributed under the Boost Software License, Version 1.0. (See accompanying
-* file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
-*
-*****************************************************************************/
+// Copyright (C) 1997-2016 by Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>
+//
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 #include <iostream>
 #include <lse/exp_number.hpp>
-
-using namespace lse;
 
 int main() {
 #ifndef BOOST_NO_EXCEPTIONS
 try {
 #endif
+  using namespace lse;
 
   exp_double x = 3;
   exp_double y = 2;

@@ -6,14 +6,12 @@
 #ifndef STAT_NORMAL_DISTRIBUTION_HPP
 #define STAT_NORMAL_DISTRIBUTION_HPP
 
-#include <math/power.hpp>
-#include <stat/moment.hpp>
-
-#include <boost/lexical_cast.hpp>
-#include <string>
-
-#include <boost/throw_exception.hpp>
 #include <stdexcept>
+#include <string>
+#include <boost/lexical_cast.hpp>
+#include <boost/throw_exception.hpp>
+#include "moment.hpp"
+#include "power.hpp"
 
 namespace stat {
 

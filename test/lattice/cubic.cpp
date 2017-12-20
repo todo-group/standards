@@ -5,7 +5,7 @@
 
 #include <iostream>
 #include <boost/lexical_cast.hpp>
-#include <lattice/simple_cubic.hpp>
+#include <lattice/cubic.hpp>
 
 int main(int argc, char** argv) {
   unsigned int Lx = 3;
@@ -21,8 +21,8 @@ int main(int argc, char** argv) {
     Ly = boost::lexical_cast<unsigned int>(argv[2]);
     Lz = boost::lexical_cast<unsigned int>(argv[3]);
   }
-  lattice::simple_cubic lat(Lx, Ly, Lz);
-  std::cout << "Simple_Cubic lattice with Lx = " << Lx << ", Ly = " << Ly << " and Lz = "
+  lattice::cubic lat(Lx, Ly, Lz);
+  std::cout << "Cubic lattice with Lx = " << Lx << ", Ly = " << Ly << " and Lz = "
             << Lz << std::endl
             << "Number of sites = " << lat.num_sites() << std::endl
             << "Number of bonds = " << lat.num_bonds() << std::endl;
