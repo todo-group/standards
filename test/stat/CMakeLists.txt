@@ -1,4 +1,3 @@
-include_directories(${PROJECT_SOURCE_DIR}/math)
 set(PROGS normal_distribution bernoulli_distribution vector)
 foreach(name ${PROGS})
   add_executable(${name} ${name}.cpp)

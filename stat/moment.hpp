@@ -7,7 +7,7 @@
 #define STAT_MOMENT_HPP
 
 #include <cmath>
-#include <power.hpp>
+#include <math/power.hpp>
 
 namespace stat {
 
