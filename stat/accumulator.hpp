@@ -11,10 +11,8 @@
 #define STAT_ACCUMULATOR_HPP
 
 #include <cmath>
-#include <stdexcept>
 #include <string>
 #include <boost/lexical_cast.hpp>
-#include <boost/throw_exception.hpp>
 #include <math/power.hpp>
 #include "moment.hpp"
 
