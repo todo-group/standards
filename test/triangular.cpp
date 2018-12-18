@@ -19,13 +19,7 @@ void test(standards::triangular const& lat) {
       EXPECT_FALSE(lat.sublattice(s) == lat.sublattice(lat.neighbor(s, k)));
       EXPECT_TRUE(lat.source(lat.neighbor_bond(s, k)) == s ||
                   lat.target(lat.neighbor_bond(s, k)) == s);
-      if (lat.sublattice(s) == 0) {
-        EXPECT_TRUE(lat.asite(lat.neighbor_triangle(s, k)) == s);
-      } else if (lat.sublattice(s) == 1) {
-        EXPECT_TRUE(lat.bsite(lat.neighbor_triangle(s, k)) == s);
-      } else {
-        EXPECT_TRUE(lat.csite(lat.neighbor_triangle(s, k)) == s);
-      }
+      EXPECT_TRUE(lat.triangle_site(lat.neighbor_triangle(s, k), lat.sublattice(s)) == s);
     }
   }
 

@@ -89,8 +89,10 @@ public:
   unsigned int num_sites() const { return length_x_ * length_y_; }
   unsigned int num_bonds() const { return 3 * num_sites(); }
   unsigned int num_triangles() const { return 2 * num_sites(); }
+  unsigned int bond_site(unsigned int b, unsigned int k) const { return bsites_[b][k]; }
   unsigned int source(unsigned int b) const { return bsites_[b][0]; }
   unsigned int target(unsigned int b) const { return bsites_[b][1]; }
+  unsigned int triangle_site(unsigned int p, unsigned int k) const { return tsites_[p][k]; }
   unsigned int asite(unsigned int p) const { return tsites_[p][0]; }
   unsigned int bsite(unsigned int p) const { return tsites_[p][1]; }
   unsigned int csite(unsigned int p) const { return tsites_[p][2]; }
