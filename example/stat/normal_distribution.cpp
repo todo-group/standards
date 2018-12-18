@@ -4,9 +4,7 @@
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 #include <iostream>
-#include <boost/random.hpp>
-
-#include <standards/accumulator.hpp>
+#include <random>
 #include <standards/normal_distribution.hpp>
 #include "test.hpp"
 
@@ -20,18 +18,13 @@ int main() {
 
   std::cout << "[test for normal distribution]\n";
 
-  boost::mt19937 engine(seed);
-  boost::variate_generator<boost::mt19937&, boost::normal_distribution<> >
-    rng(engine, boost::normal_distribution<>(mu, sigma));
+  std::normal_distribution<> dist(mu, sigma);
+  std::mt19937 engine(seed);
+  standards::normal_distribution stat(mu, sigma);
 
-  standards::normal_distribution dist(mu, sigma);
-
-  std::cout << "[[series of random numbers]]\n";
-  for (int i = 0; i < 4; ++i) std::cout << rng() << std::endl;
-
-  test1(dist, rng, count);
-  test2(dist, rng, count, mmax);
-  test3(dist, rng, count, mmax);
+  test1(dist, engine, stat, count);
+  test2(dist, engine, stat, count, mmax);
+  test3(dist, engine, stat, count, mmax);
 
   return 0;
 }

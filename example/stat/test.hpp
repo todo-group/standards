@@ -4,6 +4,7 @@
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 #include <iostream>
+#include <random>
 #include <standards/power.hpp>
 #include <standards/accumulator.hpp>
 #include <standards/moment.hpp>
@@ -11,75 +12,75 @@
 using standards::p2;
 using standards::p4;
 
-template<typename DIST, typename RNG>
-void test1(DIST const& dist, RNG& rng, unsigned long count) {
+template<typename DIST, typename ENGINE, typename STAT>
+void test1(DIST& dist, ENGINE& engine, STAT const& stat, unsigned long count) {
   std::cout << "[[statistics]]\n";
-  standards::accumulator accum(dist.name());
+  standards::accumulator accum(stat.name());
   for (unsigned int n = 0; n < count; ++n) {
-    double x = rng();
+    double x = dist(engine);
     accum << x;
   }
   std::cout << "name = " << accum.name() << std::endl
             << "count = " << accum.count() << std::endl
             << "moment1 = " << accum.moment1()
-            << " [exact: " << dist.moment1() << "]" << std::endl
+            << " [exact: " << stat.moment1() << "]" << std::endl
             << "moment2 = " << accum.moment2()
-            << " [exact: " << dist.moment2() << "]" << std::endl
+            << " [exact: " << stat.moment2() << "]" << std::endl
             << "moment3 = " << accum.moment3()
-            << " [exact: " << dist.moment3() << "]" << std::endl
+            << " [exact: " << stat.moment3() << "]" << std::endl
             << "moment4 = " << accum.moment4()
-            << " [exact: " << dist.moment4() << "]" << std::endl
+            << " [exact: " << stat.moment4() << "]" << std::endl
             << "central_moment1 = " << accum.central_moment1()
-            << " [exact: " << dist.central_moment1() << "]" << std::endl
+            << " [exact: " << stat.central_moment1() << "]" << std::endl
             << "central_moment2 = " << accum.central_moment2()
-            << " [exact: " << dist.central_moment2() << "]" << std::endl
+            << " [exact: " << stat.central_moment2() << "]" << std::endl
             << "central_moment3 = " << accum.central_moment3()
-            << " [exact: " << dist.central_moment3() << "]" << std::endl
+            << " [exact: " << stat.central_moment3() << "]" << std::endl
             << "central_moment4 = " << accum.central_moment4()
-            << " [exact: " << dist.central_moment4() << "]" << std::endl
+            << " [exact: " << stat.central_moment4() << "]" << std::endl
             << "cumulant1 = " << accum.cumulant1()
-            << " [exact: " << dist.cumulant1() << "]" << std::endl
+            << " [exact: " << stat.cumulant1() << "]" << std::endl
             << "cumulant2 = " << accum.cumulant2()
-            << " [exact: " << dist.cumulant2() << "]" << std::endl
+            << " [exact: " << stat.cumulant2() << "]" << std::endl
             << "cumulant3 = " << accum.cumulant3()
-            << " [exact: " << dist.cumulant3() << "]" << std::endl
+            << " [exact: " << stat.cumulant3() << "]" << std::endl
             << "cumulant4 = " << accum.cumulant4()
-            << " [exact: " << dist.cumulant4() << "]" << std::endl
+            << " [exact: " << stat.cumulant4() << "]" << std::endl
             << "mean = " << accum.mean()
-            << " [exact: " << dist.mean() << "]" << std::endl
+            << " [exact: " << stat.mean() << "]" << std::endl
             << "variance = " << accum.variance()
-            << " [exact: " << dist.variance() << "]" << std::endl
+            << " [exact: " << stat.variance() << "]" << std::endl
             << "standard_deviation = " << accum.standard_deviation()
-            << " [exact: " << dist.standard_deviation() << "]" << std::endl
+            << " [exact: " << stat.standard_deviation() << "]" << std::endl
             << "skewness = " << accum.skewness()
-            << " [exact: " << dist.skewness() << "]" << std::endl
+            << " [exact: " << stat.skewness() << "]" << std::endl
             << "kurtosis = " << accum.kurtosis()
-            << " [exact: " << dist.kurtosis() << "]" << std::endl
+            << " [exact: " << stat.kurtosis() << "]" << std::endl
             << "kurtosis excess = " << accum.kurtosis_excess()
-            << " [exact: " << dist.kurtosis_excess() << "]" << std::endl
+            << " [exact: " << stat.kurtosis_excess() << "]" << std::endl
             << "average = " << accum.average()
-            << " [exact: " << dist.mean() << "]" << std::endl
+            << " [exact: " << stat.mean() << "]" << std::endl
             << "error = " << accum.error()
-            << " [exact: " << std::sqrt(dist.variance() / count) << "]" << std::endl;
+            << " [exact: " << std::sqrt(stat.variance() / count) << "]" << std::endl;
 }
 
-template<typename DIST, typename RNG>
-void test2(DIST const& dist, RNG& rng, unsigned long count, unsigned long mmax) {
+template<typename DIST, typename ENGINE, typename STAT>
+void test2(DIST& dist, ENGINE& engine, STAT const& stat, unsigned long count, unsigned long mmax) {
   std::cout << "[[bias test]]\n";
   for (unsigned long m = 4; m <= mmax; m *= 2) {
     standards::accumulator central_moment1, central_moment2, central_moment3, central_moment4,
       cumulant1, cumulant2, cumulant3, cumulant4;
     for (unsigned int n = 0; n < count; ++n) {
       standards::accumulator accum;
-      for (unsigned int i = 0; i < m; ++i) { accum << rng(); }
-      central_moment1 << (accum.central_moment1() - dist.central_moment1());
-      central_moment2 << (accum.central_moment2() - dist.central_moment2());
-      central_moment3 << (accum.central_moment3() - dist.central_moment3());
-      central_moment4 << (accum.central_moment4() - dist.central_moment4());
-      cumulant1 << (accum.cumulant1() - dist.cumulant1());
-      cumulant2 << (accum.cumulant2() - dist.cumulant2());
-      cumulant3 << (accum.cumulant3() - dist.cumulant3());
-      cumulant4 << (accum.cumulant4() - dist.cumulant4());
+      for (unsigned int i = 0; i < m; ++i) { accum << dist(engine); }
+      central_moment1 << (accum.central_moment1() - stat.central_moment1());
+      central_moment2 << (accum.central_moment2() - stat.central_moment2());
+      central_moment3 << (accum.central_moment3() - stat.central_moment3());
+      central_moment4 << (accum.central_moment4() - stat.central_moment4());
+      cumulant1 << (accum.cumulant1() - stat.cumulant1());
+      cumulant2 << (accum.cumulant2() - stat.cumulant2());
+      cumulant3 << (accum.cumulant3() - stat.cumulant3());
+      cumulant4 << (accum.cumulant4() - stat.cumulant4());
     }
     std::cout << m
               << ' ' << central_moment1.average() << ' ' << central_moment1.error()
@@ -94,8 +95,8 @@ void test2(DIST const& dist, RNG& rng, unsigned long count, unsigned long mmax) 
   }
 }
 
-template<typename DIST, typename RNG>
-void test3(DIST const& dist, RNG& rng, unsigned long count, unsigned long mmax) {
+template<typename DIST, typename ENGINE, typename STAT>
+void test3(DIST& dist, ENGINE& engine, STAT const& stat, unsigned long count, unsigned long mmax) {
   std::cout << "[[check for equations in notes on unbiased fourth moment estimator]]\n"
             << "# n, Eqs.(1)-(7)\n";
   for (unsigned long m = 4; m <= mmax; m *= 2) {
@@ -104,9 +105,9 @@ void test3(DIST const& dist, RNG& rng, unsigned long count, unsigned long mmax) 
     for (unsigned int n = 0; n < count; ++n) {
       double x0, x1;
       standards::accumulator accum;
-      for (unsigned int i = 0; i < 1; ++i) { x0 = rng(); accum << x0; }
-      for (unsigned int i = 1; i < 2; ++i) { x1 = rng(); accum << x1; }
-      for (unsigned int i = 2; i < m; ++i) { accum << rng(); }
+      for (unsigned int i = 0; i < 1; ++i) { x0 = dist(engine); accum << x0; }
+      for (unsigned int i = 1; i < 2; ++i) { x1 = dist(engine); accum << x1; }
+      for (unsigned int i = 2; i < m; ++i) { accum << dist(engine); }
       eq1 << x0 * x1 * p2(accum.average());
       eq2 << p2(x0) * x1 * accum.average();
       double s = p2(accum.moment2()) - 2 * p2(accum.moment1()) * accum.moment2() + p4(accum.moment1());
