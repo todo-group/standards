@@ -1,4 +1,4 @@
-# Standard Algorithms
+# Standards -- standard algorithms
 
 * config: standard configuration for CMake
 

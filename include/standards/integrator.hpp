@@ -1,19 +1,19 @@
 /*****************************************************************************
 *
-* Copyright (C) 2016 by Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>
+* Copyright (C) 2016-2018 by Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>
 *
 * Distributed under the Boost Software License, Version 1.0. (See accompanying
 * file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 *
 *****************************************************************************/
 
-#ifndef ODE_INTEGRATOR_HPP
-#define ODE_INTEGRATOR_HPP
+#ifndef STANDARDS_INTEGRATOR_HPP
+#define STANDARDS_INTEGRATOR_HPP
 
 #include <string>
 #include <vector>
 
-namespace integrator {
+namespace standards {
 
 class euler {
 public:
@@ -29,10 +29,10 @@ private:
   mutable std::vector<double> k_;
 };
   
-class rk2 {
+class runge_kutta_2 {
 public:
   static std::string name() { return "2nd-order Runge-Kutta method"; }
-  rk2(unsigned int dim) : dim_(dim), k1_(dim), k2_(dim), yt_(dim) {}
+  runge_kutta_2(unsigned int dim) : dim_(dim), k1_(dim), k2_(dim), yt_(dim) {}
   template<class F>
   void step(double t, double h, std::vector<double>& y, F const& f) const {
     double h2 = h / 2;
@@ -48,10 +48,10 @@ private:
   mutable std::vector<double> yt_;
 };
   
-class rk3 {
+class runge_kutta_3 {
 public:
   static std::string name() { return "3rd-order Runge-Kutta method"; }
-  rk3(unsigned int dim) : dim_(dim), k1_(dim), k2_(dim), k3_(dim), yt_(dim) {}
+  runge_kutta_3(unsigned int dim) : dim_(dim), k1_(dim), k2_(dim), k3_(dim), yt_(dim) {}
   template<class F>
   void step(double t, double h, std::vector<double>& y, F const& f) const {
     double h23 = 2 * h / 3;
@@ -71,10 +71,10 @@ private:
   mutable std::vector<double> yt_;
 };
 
-class rk4 {
+class runge_kutta_4 {
 public:
   static std::string name() { return "4th-order Runge-Kutta method"; }
-  rk4(unsigned int dim) : dim_(dim), k1_(dim), k2_(dim), k3_(dim), k4_(dim), yt_(dim) {}
+  runge_kutta_4(unsigned int dim) : dim_(dim), k1_(dim), k2_(dim), k3_(dim), k4_(dim), yt_(dim) {}
   template<class F>
   void step(double t, double h, std::vector<double>& y, F const& f) const {
     double h2 = h / 2;
@@ -97,6 +97,6 @@ private:
   mutable std::vector<double> yt_;
 };
 
-} // namespace integrator
+} // namespace standards
 
-#endif // ODE_INTEGRATOR_HPP
+#endif // STANDARDS_INTEGRATOR_HPP

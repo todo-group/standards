@@ -1,6 +1,6 @@
 set(PROGS
   simpson
-  exp_number
+  exp_number power
   bisection golden_section nelder_mead
   triangular
 )
@@ -11,8 +11,3 @@ foreach(name ${PROGS})
   target_link_libraries(${target_name} gtest_main)
   add_test(${target_name} ${name})
 endforeach(name)
-
-# add_subdirectory(lattice)
-# add_subdirectory(ode)
-# add_subdirectory(optimize)
-# add_subdirectory(stat)

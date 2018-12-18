@@ -1,16 +1,16 @@
-// Copyright (C) 1996-2016 by Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>
+// Copyright (C) 1996-2018 by Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef MATH_POWER_HPP
-#define MATH_POWER_HPP
+#ifndef STANDARDS_POWER_HPP
+#define STANDARDS_POWER_HPP
 
 #include <boost/type_traits/is_arithmetic.hpp>
 #include <boost/utility/enable_if.hpp>
 #include <complex>
 
-namespace math {
+namespace standards {
 
 using boost::is_arithmetic;
 using boost::enable_if;
@@ -67,6 +67,10 @@ p2(T const& t) { return power2(t); }
 template<typename T>
 typename detail::power_traits<std::complex<T> >::power_type
 power2(std::complex<T> const& t) { return power2(real(t)) + power2(imag(t)); }
+
+template<typename T>
+typename detail::power_traits<std::complex<T> >::power_type
+p2(std::complex<T> const& t) { return p2(real(t)) + p2(imag(t)); }
 
 //
 // function power3 and p3
@@ -170,6 +174,6 @@ p6(T const& t) { return power6(t); }
 
 #endif
 
-} // end namespace math
+} // end namespace standards
 
-#endif // MATH_POWER_HPP
+#endif // STANDARDS_POWER_HPP
