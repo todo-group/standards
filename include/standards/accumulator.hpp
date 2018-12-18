@@ -1,4 +1,4 @@
-// Copyright (C) 2015-2016 by Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>
+// Copyright (C) 2015-2018 by Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -7,21 +7,17 @@
 // Ref: standards/doc/stat/fourth-moment.pdf
 // Ref: wrn:2017-01-20, 2017-02-07, 2017-02-09
 
-#ifndef STAT_ACCUMULATOR_HPP
-#define STAT_ACCUMULATOR_HPP
+#ifndef STANDARDS_ACCUMULATOR_HPP
+#define STANDARDS_ACCUMULATOR_HPP
 
 #include <cmath>
 #include <string>
 #include <boost/lexical_cast.hpp>
-#include <math/power.hpp>
+#include "power.hpp"
 #include "moment.hpp"
 
-namespace stat {
+namespace standards {
 
-using math::p2;
-using math::p3;
-using math::p4;
- 
 class accumulator : public moment<accumulator> {
 private:
   typedef moment<accumulator> super_type;
@@ -92,6 +88,6 @@ inline std::ostream& operator<<(std::ostream& os, accumulator const& accum) {
   return os;
 }
 
-} // end namespace stat
+} // end namespace standards
 
-#endif // STAT_ACCUMULATOR_HPP
+#endif // STANDARDS_ACCUMULATOR_HPP

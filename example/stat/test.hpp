@@ -1,20 +1,20 @@
-// Copyright (C) 2016 by Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>
+// Copyright (C) 2016-2018 by Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
-#include <math/power.hpp>
-#include <stat/accumulator.hpp>
-#include <stat/moment.hpp>
 #include <iostream>
+#include <standards/power.hpp>
+#include <standards/accumulator.hpp>
+#include <standards/moment.hpp>
 
-using math::p2;
-using math::p4;
+using standards::p2;
+using standards::p4;
 
 template<typename DIST, typename RNG>
 void test1(DIST const& dist, RNG& rng, unsigned long count) {
   std::cout << "[[statistics]]\n";
-  stat::accumulator accum(dist.name());
+  standards::accumulator accum(dist.name());
   for (unsigned int n = 0; n < count; ++n) {
     double x = rng();
     accum << x;
@@ -67,10 +67,10 @@ template<typename DIST, typename RNG>
 void test2(DIST const& dist, RNG& rng, unsigned long count, unsigned long mmax) {
   std::cout << "[[bias test]]\n";
   for (unsigned long m = 4; m <= mmax; m *= 2) {
-    stat::accumulator central_moment1, central_moment2, central_moment3, central_moment4,
+    standards::accumulator central_moment1, central_moment2, central_moment3, central_moment4,
       cumulant1, cumulant2, cumulant3, cumulant4;
     for (unsigned int n = 0; n < count; ++n) {
-      stat::accumulator accum;
+      standards::accumulator accum;
       for (unsigned int i = 0; i < m; ++i) { accum << rng(); }
       central_moment1 << (accum.central_moment1() - dist.central_moment1());
       central_moment2 << (accum.central_moment2() - dist.central_moment2());
@@ -100,10 +100,10 @@ void test3(DIST const& dist, RNG& rng, unsigned long count, unsigned long mmax) 
             << "# n, Eqs.(1)-(7)\n";
   for (unsigned long m = 4; m <= mmax; m *= 2) {
     double p = m;
-    stat::accumulator eq1, eq2, eq3, eq4, eq5, eq6, eq7;
+    standards::accumulator eq1, eq2, eq3, eq4, eq5, eq6, eq7;
     for (unsigned int n = 0; n < count; ++n) {
       double x0, x1;
-      stat::accumulator accum;
+      standards::accumulator accum;
       for (unsigned int i = 0; i < 1; ++i) { x0 = rng(); accum << x0; }
       for (unsigned int i = 1; i < 2; ++i) { x1 = rng(); accum << x1; }
       for (unsigned int i = 2; i < m; ++i) { accum << rng(); }

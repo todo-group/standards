@@ -1,20 +1,16 @@
-// Copyright (C) 2016 by Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>
+// Copyright (C) 2016-2018 by Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef STAT_MOMENT_HPP
-#define STAT_MOMENT_HPP
+#ifndef STANDARDS_MOMENT_HPP
+#define STANDARDS_MOMENT_HPP
 
 #include <cmath>
-#include <math/power.hpp>
+#include "power.hpp"
 
-namespace stat {
+namespace standards {
 
-using math::p2;
-using math::p3;
-using math::p4;
-  
 template<typename DIST>
 class moment {
 private:
@@ -53,6 +49,6 @@ private:
   dist_type const& dist_;
 };
 
-} // end namespace stat
+} // end namespace standards
 
-#endif // STAT_CUMULANT_HPP
+#endif // STANDARDS_CUMULANT_HPP

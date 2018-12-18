@@ -1,5 +1,5 @@
 set(PROGS normal_distribution bernoulli_distribution vector)
 foreach(name ${PROGS})
   add_executable(${name} ${name}.cpp)
-  # add_iotest(${name})
+  add_iotest(${name})
 endforeach(name)

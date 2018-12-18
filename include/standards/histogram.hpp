@@ -3,13 +3,13 @@
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef STAT_HISTOGRAM_HPP
-#define STAT_HISTOGRAM_HPP
+#ifndef STANDARDS_HISTOGRAM_HPP
+#define STANDARDS_HISTOGRAM_HPP
 
 #include <cstdint>
 #include <stdexcept>
 
-namespace stat {
+namespace standards {
 
 class histogram {
 public:
@@ -54,6 +54,6 @@ inline std::ostream& operator<<(std::ostream& os, histogram const& hist) {
   return os;
 }
 
-} // end namespace stat
+} // end namespace standards
 
-#endif // STAT_HISTOGRAM_HPP
+#endif // STANDARDS_HISTOGRAM_HPP

@@ -1,19 +1,18 @@
-// Copyright (C) 2016 by Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>
+// Copyright (C) 2016-2018 by Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef STAT_BERNOULLI_DISTRIBUTION_HPP
-#define STAT_BERNOULLI_DISTRIBUTION_HPP
+#ifndef STANDARDS_BERNOULLI_DISTRIBUTION_HPP
+#define STANDARDS_BERNOULLI_DISTRIBUTION_HPP
 
 #include <cmath>
 #include <stdexcept>
 #include <string>
 #include <boost/lexical_cast.hpp>
-#include <boost/throw_exception.hpp>
 #include "moment.hpp"
 
-namespace stat {
+namespace standards {
 
 class bernoulli_distribution : public moment<bernoulli_distribution> {
 private:
@@ -21,7 +20,7 @@ private:
 public:
   bernoulli_distribution(double p) : super_type(*this), p_(p) {
     if (p < 0 || p >1)
-      boost::throw_exception(std::invalid_argument("stat::bernoulli_distribution"));
+      throw std::invalid_argument("standards::bernoulli_distribution");
   }
   std::string name() const {
     return "Bernoulli Distribution: Be(" + boost::lexical_cast<std::string>(p_) + ")";
@@ -34,6 +33,6 @@ private:
   double p_;
 };
 
-} // end namespace stat
+} // end namespace standards
 
-#endif // STAT_BERNOULLI_DISTRIBUTION_HPP
+#endif // STANDARDS_BERNOULLI_DISTRIBUTION_HPP
