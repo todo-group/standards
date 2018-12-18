@@ -1,0 +1,6 @@
+add_subdirectory(integral)
+add_subdirectory(lattice)
+# add_subdirectory(lse)
+# add_subdirectory(ode)
+add_subdirectory(optimization)
+# add_subdirectory(stat)

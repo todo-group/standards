@@ -1,0 +1,5 @@
+set(PROGS chain square triangular cubic fully_connected)
+foreach(name ${PROGS})
+  add_executable(${name} ${name}.cpp)
+  add_iotest(${name} ${name})
+endforeach(name)

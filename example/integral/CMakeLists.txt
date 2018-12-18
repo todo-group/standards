@@ -1,0 +1,6 @@
+set(PROGS simpson_1d simpson_2d)
+foreach(name ${PROGS})
+  add_executable(${name} ${name}.cpp)
+  target_link_libraries(${name})
+  add_test(${name} ${name})
+endforeach(name)

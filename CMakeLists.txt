@@ -1,11 +1,22 @@
-#  Copyright (C) 2016-2017 by Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>
-#
-#  Distributed under the Boost Software License, Version 1.0. (See accompanying
-#  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
-
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 project(standards NONE)
+
 include(config/core.cmake)
 
-include_directories(${PROJECT_SOURCE_DIR})
+include_directories(${PROJECT_SOURCE_DIR}/include)
+
+# Boost
+find_package(Boost REQUIRED)
+include_directories(${Boost_INCLUDE_DIR})
+
+# Google Test
+set(GOOGLETEST_VERSION 1)
+add_subdirectory(tool/googletest)
+include_directories(tools/googletest/include)
+
+# IO Test
+include(add_iotest)
+enable_testing()
+
 add_subdirectory(test)
+add_subdirectory(example)
