@@ -19,6 +19,8 @@ void test(standards::triangular const& lat) {
       EXPECT_FALSE(lat.sublattice(s) == lat.sublattice(lat.neighbor(s, k)));
       EXPECT_TRUE(lat.source(lat.neighbor_bond(s, k)) == s ||
                   lat.target(lat.neighbor_bond(s, k)) == s);
+      EXPECT_TRUE(lat.bond_site(lat.neighbor_bond(s, k), 0) == s ||
+                  lat.bond_site(lat.neighbor_bond(s, k), 1) == s);
       EXPECT_TRUE(lat.triangle_site(lat.neighbor_triangle(s, k), lat.sublattice(s)) == s);
     }
   }
@@ -55,9 +57,9 @@ void test(standards::triangular const& lat) {
 
   std::cout << "[test for triangles]\n";
   for (unsigned int p = 0; p < lat.num_triangles(); ++p) {
-    unsigned int sa = lat.asite(p);
-    unsigned int sb = lat.bsite(p);
-    unsigned int sc = lat.csite(p);
+    unsigned int sa = lat.triangle_site(p, 0);
+    unsigned int sb = lat.triangle_site(p, 1);
+    unsigned int sc = lat.triangle_site(p, 2);
     std::cout << p << ' ' << sa << ' ' << sb << ' ' << sc << std::endl;
     EXPECT_FALSE(sa == sb);
     EXPECT_FALSE(sb == sc);
@@ -86,9 +88,9 @@ void test(standards::triangular const& lat) {
   }
 
   for (unsigned int p = 0; p < lat.num_triangles(); ++p) {
-    ++count[lat.asite(p)];
-    ++count[lat.bsite(p)];
-    ++count[lat.csite(p)];
+    ++count[lat.triangle_site(p, 0)];
+    ++count[lat.triangle_site(p, 1)];
+    ++count[lat.triangle_site(p, 2)];
   }
   for (unsigned int s = 0; s < lat.num_sites(); ++s) {
     EXPECT_EQ(12, count[s]);

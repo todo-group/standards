@@ -3,18 +3,18 @@
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
+#include <cstdlib>
 #include <iostream>
-#include <boost/lexical_cast.hpp>
 #include <standards/triangular.hpp>
 
 int main(int argc, char** argv) {
   unsigned int L = 6;
   unsigned int M = 3;
   if (argc == 2) {
-    L = M = boost::lexical_cast<unsigned int>(argv[1]);
+    L = M = std::atoi(argv[1]);
   } else if (argc >= 3) {
-    L = boost::lexical_cast<unsigned int>(argv[1]);
-    M = boost::lexical_cast<unsigned int>(argv[2]);
+    L = std::atoi(argv[1]);
+    M = std::atoi(argv[2]);
   }
 
   standards::triangular lat(L, M);
@@ -57,7 +57,7 @@ int main(int argc, char** argv) {
   }
   std::cout << "[sites of triangles]\n";
   for (unsigned int p = 0; p < lat.num_triangles(); ++p) {
-    std::cout << p << ": " << lat.asite(p) << " -- " << lat.bsite(p) << " -- " << lat.csite(p) << std::endl;
+    std::cout << p << ": " << lat.triangle_site(p, 0) << " -- " << lat.triangle_site(p, 1) << " -- " << lat.triangle_site(p, 2) << std::endl;
   }
   return 0;
 }

@@ -14,14 +14,18 @@ public:
   unsigned int get_length() const { return length_; }
   unsigned int num_sites() const { return get_length(); }
   unsigned int num_bonds() const { return get_length(); }
-  unsigned int source(unsigned int b) const { return b; }
-  unsigned int target(unsigned int b) const { return (b + 1) % get_length(); }
+  unsigned int bond_site(unsigned int b, unsigned int k) const { return (b + k) % get_length(); }
+  unsigned int source(unsigned int b) const { return bond_site(b, 0); }
+  unsigned int target(unsigned int b) const { return bond_site(b, 1); }
   unsigned int num_neighbors() const { return 2; }
   unsigned int neighbor(unsigned int s, unsigned int k) const {
     return (get_length() + s + 1 - 2 * k) % get_length();
   }
-  double site_phase(unsigned int s) const { return 2.0 * (s & 1) - 1.0; }
-  double bond_phase(unsigned int b) const { return site_phase(b); }
+  unsigned int neighbor_bond(unsigned int s, unsigned int k) const {
+    return (get_length() + s - k) % get_length();
+  }
+  unsigned int sublattice(unsigned int s) const { return s % 2; }
+  double phase(unsigned int s) const { return 1.0 - 2.0 * (s % 2); }
 private:
   unsigned int length_;
 };

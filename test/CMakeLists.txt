@@ -2,7 +2,7 @@ set(PROGS
   simpson
   exp_number power
   bisection golden_section nelder_mead
-  triangular
+  chain square triangular cubic
 )
 foreach(name ${PROGS})
   set(target_name test_${name})
