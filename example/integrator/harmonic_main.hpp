@@ -7,8 +7,8 @@
 *
 *****************************************************************************/
 
+#include <cstdlib>
 #include <iostream>
-#include <boost/lexical_cast.hpp>
 
 class hamiltonian {
 public:
@@ -33,8 +33,8 @@ int main(int argc, char **argv) {
   double t_init = 0;
   double t_final = 10;
   double dt = 0.1;
-  if (argc >= 2) t_final = boost::lexical_cast<double>(argv[1]);
-  if (argc >= 3) dt = boost::lexical_cast<double>(argv[2]);
+  if (argc >= 2) t_final = std::atof(argv[1]);
+  if (argc >= 3) dt = std::atof(argv[2]);
   std::cout << "# " << integrator_t::name() << std::endl
             << "# t_init  = " << t_init << std::endl
             << "# t_final = " << t_final << std::endl

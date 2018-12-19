@@ -19,10 +19,9 @@ public:
   rastrigin(unsigned int n) : n_(n) {}
   double operator()(std::vector<double> const& x) const {
     const double a = 10;
-    const double pi = boost::math::constants::pi<double>();
     double f = a * n_;
     for (unsigned int i = 0; i < n_; ++i) {
-      f += x[i] * x[i] - a * std::cos(2 * pi * x[i]);
+      f += x[i] * x[i] - a * std::cos(2 * M_PI * x[i]);
     }
     return f;
   }

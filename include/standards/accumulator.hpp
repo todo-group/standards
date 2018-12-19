@@ -12,7 +12,6 @@
 
 #include <cmath>
 #include <string>
-#include <boost/lexical_cast.hpp>
 #include "power.hpp"
 #include "moment.hpp"
 
@@ -79,8 +78,8 @@ private:
 
 inline std::string format(accumulator const& accum) {
   return accum.name() + " = "
-    + boost::lexical_cast<std::string>(accum.average()) + " +- "
-    + boost::lexical_cast<std::string>(accum.error());
+    + std::to_string(accum.average()) + " +- "
+    + std::to_string(accum.error());
 }
 
 inline std::ostream& operator<<(std::ostream& os, accumulator const& accum) {

@@ -6,15 +6,9 @@
 #ifndef STANDARDS_POWER_HPP
 #define STANDARDS_POWER_HPP
 
-#include <boost/type_traits/is_arithmetic.hpp>
-#include <boost/utility/enable_if.hpp>
 #include <complex>
 
 namespace standards {
-
-using boost::is_arithmetic;
-using boost::enable_if;
-using boost::disable_if;
 
 namespace detail {
 
@@ -34,35 +28,11 @@ struct power_traits<std::complex<T> > {
 // function power2 and p2
 //
 
-#ifndef BOOST_NO_SFINAE
+template<typename T>
+typename detail::power_traits<T>::power_type power2(T const& t) { return t * t; }
 
 template<typename T>
-typename detail::power_traits<T>::power_type
-power2(T t, typename enable_if<is_arithmetic<T> >::type* = 0) { return t * t; }
-
-template<typename T>
-typename detail::power_traits<T>::power_type
-power2(T const& t, typename disable_if<is_arithmetic<T> >::type* = 0) { return t * t; }
-
-template<typename T>
-typename detail::power_traits<T>::power_type
-p2(T t, typename enable_if<is_arithmetic<T> >::type* = 0) { return power2(t); }
-
-template<typename T>
-typename detail::power_traits<T>::power_type
-p2(T const& t, typename disable_if<is_arithmetic<T> >::type* = 0) { return power2(t); }
-
-#else
-  
-template<typename T>
-typename detail::power_traits<T>::power_type
-power2(T const& t) { return t * t; }
-
-template<typename T>
-typename detail::power_traits<T>::power_type
-p2(T const& t) { return power2(t); }
-
-#endif
+typename detail::power_traits<T>::power_type p2(T const& t) { return power2(t); }
 
 template<typename T>
 typename detail::power_traits<std::complex<T> >::power_type
@@ -76,103 +46,31 @@ p2(std::complex<T> const& t) { return p2(real(t)) + p2(imag(t)); }
 // function power3 and p3
 //
 
-#ifndef BOOST_NO_SFINAE
+template<typename T>
+typename detail::power_traits<T>::power_type power3(T const& t) { return t * t * t; }
 
 template<typename T>
-typename detail::power_traits<T>::power_type
-power3(T t, typename enable_if<is_arithmetic<T> >::type* = 0) { return t * t * t; }
-
-template<typename T>
-typename detail::power_traits<T>::power_type
-power3(T const& t, typename disable_if<is_arithmetic<T> >::type* = 0) { return t * t * t; }
-
-template<typename T>
-typename detail::power_traits<T>::power_type
-p3(T t, typename enable_if<is_arithmetic<T> >::type* = 0) { return power3(t); }
-
-template<typename T>
-typename detail::power_traits<T>::power_type
-p3(T const& t, typename disable_if<is_arithmetic<T> >::type* = 0) { return power3(t); }
-
-#else
-  
-template<typename T>
-typename detail::power_traits<T>::power_type
-power3(T const& t) { return t * t * t; }
-
-template<typename T>
-typename detail::power_traits<T>::power_type
-p3(T const& t) { return power3(t); }
-
-#endif
+typename detail::power_traits<T>::power_type p3(T const& t) { return power3(t); }
 
 //
 // function power4 and p4
 //
 
-#ifndef BOOST_NO_SFINAE
+template<typename T>
+typename detail::power_traits<T>::power_type power4(T const& t) { return power2(power2(t)); }
 
 template<typename T>
-typename detail::power_traits<T>::power_type
-power4(T t, typename enable_if<is_arithmetic<T> >::type* = 0) { return power2(power2(t)); }
-
-template<typename T>
-typename detail::power_traits<T>::power_type
-power4(T const& t, typename disable_if<is_arithmetic<T> >::type* = 0) { return power2(power2(t)); }
-
-template<typename T>
-typename detail::power_traits<T>::power_type
-p4(T t, typename enable_if<is_arithmetic<T> >::type* = 0) { return power4(t); }
-
-template<typename T>
-typename detail::power_traits<T>::power_type
-p4(T const& t, typename disable_if<is_arithmetic<T> >::type* = 0) { return power4(t); }
-
-#else
-  
-template<typename T>
-typename detail::power_traits<T>::power_type
-power4(T const& t) { return power2(power2(t)); }
-
-template<typename T>
-typename detail::power_traits<T>::power_type
-p4(T const& t) { return power4(t); }
-
-#endif
+typename detail::power_traits<T>::power_type p4(T const& t) { return power4(t); }
 
 //
 // function power6 and p6
 //
 
-#ifndef BOOST_NO_SFINAE
+template<typename T>
+typename detail::power_traits<T>::power_type power6(T const& t) { return power3(power2(t)); }
 
 template<typename T>
-typename detail::power_traits<T>::power_type
-power6(T t, typename enable_if<is_arithmetic<T> >::type* = 0) { return power3(power2(t)); }
-
-template<typename T>
-typename detail::power_traits<T>::power_type
-power6(T const& t, typename disable_if<is_arithmetic<T> >::type* = 0) { return power3(power2(t)); }
-
-template<typename T>
-typename detail::power_traits<T>::power_type
-p6(T t, typename enable_if<is_arithmetic<T> >::type* = 0) { return power6(t); }
-
-template<typename T>
-typename detail::power_traits<T>::power_type
-p6(T const& t, typename disable_if<is_arithmetic<T> >::type* = 0) { return power6(t); }
-
-#else
-  
-template<typename T>
-typename detail::power_traits<T>::power_type
-power6(T const& t) { return power3(power2(t)); }
-
-template<typename T>
-typename detail::power_traits<T>::power_type
-p6(T const& t) { return power6(t); }
-
-#endif
+typename detail::power_traits<T>::power_type p6(T const& t) { return power6(t); }
 
 } // end namespace standards
 

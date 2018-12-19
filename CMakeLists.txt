@@ -5,10 +5,6 @@ include(config/core.cmake)
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
-# Boost
-find_package(Boost REQUIRED)
-include_directories(${Boost_INCLUDE_DIR})
-
 # Google Test
 set(GOOGLETEST_VERSION 1)
 add_subdirectory(tool/googletest)

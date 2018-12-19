@@ -9,7 +9,6 @@
 #include <cmath>
 #include <stdexcept>
 #include <string>
-#include <boost/lexical_cast.hpp>
 #include "moment.hpp"
 
 namespace standards {
@@ -23,7 +22,7 @@ public:
       throw std::invalid_argument("standards::bernoulli_distribution");
   }
   std::string name() const {
-    return "Bernoulli Distribution: Be(" + boost::lexical_cast<std::string>(p_) + ")";
+    return "Bernoulli Distribution: Be(" + std::to_string(p_) + ")";
   }
   double moment1() const { return p_; }
   double moment2() const { return p_; }

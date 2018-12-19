@@ -8,7 +8,6 @@
 
 #include <stdexcept>
 #include <string>
-#include <boost/lexical_cast.hpp>
 #include "power.hpp"
 #include "moment.hpp"
 
@@ -23,8 +22,8 @@ public:
       throw std::invalid_argument("standards::normal_distribution");
   }
   std::string name() const {
-    return "Normal Distribution: N(" + boost::lexical_cast<std::string>(mu_) + ","
-      + boost::lexical_cast<std::string>(sigma_) + ")";
+    return "Normal Distribution: N(" + std::to_string(mu_) + ","
+      + std::to_string(sigma_) + ")";
   }
   double moment1() const { return mu_; }
   double moment2() const { return p2(mu_) + p2(sigma_); }

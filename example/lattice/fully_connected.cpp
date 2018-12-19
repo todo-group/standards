@@ -3,14 +3,14 @@
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
+#include <cstdlib>
 #include <iostream>
-#include <boost/lexical_cast.hpp>
 #include <standards/fully_connected.hpp>
 
 int main(int argc, char** argv) {
   unsigned int N = 8;
   if (argc >= 2) {
-    N = boost::lexical_cast<unsigned int>(argv[1]);
+    N = std::atoi(argv[1]);
   }
   standards::fully_connected lat(N);
   std::cout << "Fully connected lattice with N = " << N << std::endl
