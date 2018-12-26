@@ -75,8 +75,7 @@ void triangular::init() {
   tsites_.resize(num_triangles());
   sublattice_.resize(num_sites());
   phase_.resize(num_sites());
-  double qx = 2 * M_PI / 3;
-  double qy = qx;
+  double q = 2 * M_PI / 3;
   for (unsigned int s = 0; s < num_sites(); ++s) {
     int x, y;
     std::tie(x, y) = index2xy(s);
@@ -87,9 +86,7 @@ void triangular::init() {
     neighbors_[s][4] = xy2index(x    , y - 1);
     neighbors_[s][5] = xy2index(x + 1, y - 1);
     sublattice_[s] = index2sublattice(s);
-    double rx, ry;
-    std::tie(rx, ry) = index2coordinate(s);
-    phase_[s] = std::exp(std::complex<double>(0.0, qx * rx + qy * ry));
+    phase_[s] = std::exp(std::complex<double>(0.0, q * sublattice_[s]));
   }
   for (unsigned int b = 0; b < num_bonds(); ++b) {
     unsigned int s = b / 3;
