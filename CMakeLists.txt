@@ -14,5 +14,6 @@ include_directories(tools/googletest/include)
 include(add_iotest)
 enable_testing()
 
+add_subdirectory(include)
 add_subdirectory(test)
 add_subdirectory(example)
