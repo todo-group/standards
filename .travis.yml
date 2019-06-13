@@ -1,0 +1,11 @@
+language: cpp
+dist: xenial
+
+install: true
+
+script:
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make
+  - ctest -V
