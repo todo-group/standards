@@ -1,6 +1,6 @@
 /*****************************************************************************
 *
-* Copyright (C) 2016-2018 by Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>
+* Copyright (C) 2016-2019 by Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>
 *
 * Distributed under the Boost Software License, Version 1.0. (See accompanying
 * file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -10,6 +10,7 @@
 #ifndef STANDARDS_INTEGRATOR_HPP
 #define STANDARDS_INTEGRATOR_HPP
 
+#include <cmath>
 #include <string>
 #include <vector>
 
@@ -97,10 +98,10 @@ private:
   mutable std::vector<double> yt_;
 };
 
-class velocity_velret{
+class velocity_velret {
 public:
   static std::string name() { return "Velocity Verlet method"; }
-  VelocityVelret(int dim) : dim_(dim), k1_(dim), k2_(dim) {}
+  velocity_velret(int dim) : dim_(dim), k1_(dim), k2_(dim) {}
   template<class F>
   void step(double t, double h, std::vector<double>& y, F const& f) const {
     const double h22 = h * h / 2;
@@ -117,15 +118,13 @@ private:
   mutable std::vector<double> k2_;
 };
 
-
-class yoshida_symplectic_4{
-
 // ref .American Journal of Physics 73, 938 (2005) 
 //      or original paper : Phys. Lett. A 150, 262–268 (1990)
 
+class yoshida_symplectic_4 {
 public:
   static std::string name() { return "4th-order Yoshida symplectic method"; }
-  Yoshida4th(int dim) : dim_(dim), k1_(dim), k2_(dim), k3_(dim), k4_(dim){}
+  yoshida_symplectic_4(int dim) : dim_(dim), k1_(dim), k2_(dim), k3_(dim), k4_(dim){}
   template<class F>
   void step(double t, double h, std::vector<double>& y, F const& f) const {
     const int  dim2 = dim_ / 2;
