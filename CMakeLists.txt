@@ -3,7 +3,7 @@ project(standards NONE)
 
 include(config/core.cmake)
 
-include_directories(${PROJECT_SOURCE_DIR}/include)
+include_directories(${PROJECT_SOURCE_DIR})
 
 # Google Test
 set(GOOGLETEST_VERSION 1)
@@ -14,6 +14,6 @@ include_directories(tools/googletest/include)
 include(add_iotest)
 enable_testing()
 
-add_subdirectory(include)
+add_subdirectory(standards)
 add_subdirectory(test)
 add_subdirectory(example)
