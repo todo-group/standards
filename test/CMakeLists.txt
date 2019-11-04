@@ -1,4 +1,5 @@
 set(PROGS
+  timer
   simpson
   exp_number power
   bisection golden_section nelder_mead

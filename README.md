@@ -38,3 +38,5 @@
 * stat: statics
 
   * stat::accumulator - estimate central moments and cumulants of random samples
+
+* timer: a simple timer class (similar to boost.timer)
