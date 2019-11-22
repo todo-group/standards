@@ -1,0 +1,19 @@
+name: build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-16.04
+    
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        submodules: true
+    - name: cmake
+      run: mkdir build && cd build && cmake -DCMAKE_CXX_FLAGS="-Wall -Werror" ..
+    - name: make
+      run: make
+    - name: ctest
+      run: cd build && ctest -V
