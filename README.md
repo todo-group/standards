@@ -1,3 +1,5 @@
+[![Build Status](https://github.com/todo-group/standards/workflows/build/badge.svg)](https://github.com/todo-group/standards/actions?query=workflow%3Abuild)
+
 # Standards -- standard algorithms
 
 * config: standard configuration for CMake
