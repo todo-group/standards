@@ -9,9 +9,9 @@
 #include "test.hpp"
 
 int main() {
-  unsigned long count = 65536;
-  unsigned long mmax = 1024;
-  unsigned long seed = 12345;
+  std::size_t count = 65536;
+  std::size_t mmax = 1024;
+  std::size_t seed = 12345;
 
   double mu = 2.0;
   double sigma = 1.5;

@@ -9,9 +9,9 @@
 #include <standards/accumulator.hpp>
 
 int main() {
-  unsigned long np = 4;
-  unsigned long count = 65536;
-  unsigned long seed = 12345;
+  std::size_t np = 4;
+  std::size_t count = 65536;
+  std::size_t seed = 12345;
 
   double mu = 2.0;
   double sigma = 1.5;
@@ -22,13 +22,13 @@ int main() {
   std::normal_distribution<> dist(mu, sigma);
 
   std::vector<standards::accumulator> accum(np);
-  for (int p = 0; p < np; ++p) {
+  for (std::size_t p = 0; p < np; ++p) {
     accum[p].set_name("accum[" + std::to_string(p) + "]");
   }
-  for (int i = 0; i < count; ++i) {
-    for (int p = 0; p < np; ++p) accum[p] << dist(engine);
+  for (std::size_t i = 0; i < count; ++i) {
+    for (std::size_t p = 0; p < np; ++p) accum[p] << dist(engine);
   }
-  for (int p = 0; p < np; ++p) {
+  for (std::size_t p = 0; p < np; ++p) {
     std::cout << accum[p] << std::endl;
   }
 
