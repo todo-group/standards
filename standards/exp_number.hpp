@@ -1,4 +1,4 @@
-// Copyright (C) 1997-2018 by Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>
+// Copyright (C) 1997-2020 by Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -104,6 +104,16 @@ public:
     self_ res(*this);
     res.log_ *= 0.5;
     return res;
+  }
+
+  static self_ exp(value_type v) {
+    return self_(v);
+  }
+  static self_ cosh(value_type v) {
+    return (self_(v) + self_(-v)) / 2;
+  }
+  static self_ sinh(value_type v) {
+    return (self_(v) - self_(-v)) / 2;
   }
 
   bool operator>(int v) const { return this->operator>(static_cast<value_type>(v)); }
