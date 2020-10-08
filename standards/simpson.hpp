@@ -11,97 +11,98 @@
 
 namespace standards {
 
-template<typename F>
-double simpson_1d(F const& func, double x0, double x1, unsigned int n) {
+template<typename F, typename T, typename I>
+auto simpson_1d(F const& func, T x0, T x1, I n) -> decltype(func(x0)) {
+  typedef decltype(func(x0)) result_t;
   if (n == 0 || (n % 2) != 0)
-    throw std::invalid_argument("n should be positive and a multiple of two");
-  double dx = (x1 - x0) / n;
-  double g = 0.0;
+    throw(std::invalid_argument("n should be positive and a multiple of two"));
+  auto dx = (x1 - x0) / n;
+  result_t g(0);
   // i == 0 || i == n
   g += func(x0) + func(x1);
   // i = 1/2 ... n-1/2
-  for (unsigned int i = 0; i < n; ++i) {
-    double x = x0 + dx * (i + 0.5);
+  for (I i = 0; i < n; ++i) {
+    auto x = x0 + dx * (2*i + 1) / 2;
     g += 4 * func(x);
   }
   // i = 1 ... n-1
-  for (unsigned int i = 1; i < n; ++i) {
-    double x = x0 + dx * i;
+  for (I i = 1; i < n; ++i) {
+    auto x = x0 + dx * i;
     g += 2 * func(x);
   }
   g *= dx / 6;
   return g;
 }
 
-template<typename F>
-double simpson_2d(F const& func, double x0, double y0, double x1, double y1,
-  unsigned int nx, unsigned int ny) {
+template<typename F, typename T, typename I>
+auto simpson_2d(F const& func, T x0, T y0, T x1, T y1, I nx, I ny) -> decltype(func(x0, y0)) {
+  typedef decltype(func(x0, y0)) result_t;
   if (nx == 0 || (nx % 2) != 0 || ny == 0 || (ny % 2) != 0)
-    throw std::invalid_argument("nx and ny should be positive and a multiple of two");
-  double dx = (x1 - x0) / nx;
-  double dy = (y1 - y0) / ny;
-  double g = 0.0;
+    throw(std::invalid_argument("nx and ny should be positive and multiples of two"));
+  auto dx = (x1 - x0) / nx;
+  auto dy = (y1 - y0) / ny;
+  result_t g(0);
   // i == 0
   {
-    double x = x0;
+    auto x = x0;
     //   j == 0 || j == ny
     g += func(x, y0) + func(x, y1);
     //   j = 1/2 ... ny-1/2
-    for (unsigned int j = 0; j < ny; ++j) {
-      double y = y0 + dy * (j + 0.5);
+    for (I j = 0; j < ny; ++j) {
+      auto y = y0 + dy * (2*j + 1) / 2;
       g += 4 * func(x, y);
     }
     //   j = 1 ... ny-1
-    for (unsigned int j = 1; j < ny; ++j) {
-      double y = y0 + dy * j;
+    for (I j = 1; j < ny; ++j) {
+      auto y = y0 + dy * j;
       g += 2 * func(x, y);
     }
   }
   // i = 1/2 ... nx-1/2
-  for (unsigned int i = 0; i < nx; ++i) {
-    double x = x0 + dx * (i + 0.5);
+  for (I i = 0; i < nx; ++i) {
+    auto x = x0 + dx * (2*i + 1) / 2;
     //   j == 0 || j == ny
     g += 4 * (func(x, y0) + func(x, y1));
     //   j = 1/2 ... ny-1/2
-    for (unsigned int j = 0; j < ny; ++j) {
-      double y = y0 + dy * (j + 0.5);
+    for (I j = 0; j < ny; ++j) {
+      auto y = y0 + dy * (2*j + 1) / 2;
       g += 16 * func(x, y);
     }
     //   j = 1 ... ny-1
-    for (unsigned int j = 1; j < ny; ++j) {
-      double y = y0 + dy * j;
+    for (I j = 1; j < ny; ++j) {
+      auto y = y0 + dy * j;
       g += 8 * func(x, y);
     }
   }
   // i = 1 ... nx-1
-  for (unsigned int i = 1; i < nx; ++i) {
-    double x = x0 + dx * i;
+  for (I i = 1; i < nx; ++i) {
+    auto x = x0 + dx * i;
     //   j == 0 || j == ny
     g += 2 * (func(x, y0) + func(x, y1));
     //   j = 1/2 ... ny-1/2
-    for (unsigned int j = 0; j < ny; ++j) {
-      double y = y0 + dy * (j + 0.5);
+    for (I j = 0; j < ny; ++j) {
+      auto y = y0 + dy * (2*j + 1) / 2;
       g += 8 * func(x, y);
     }
     //   j = 1 ... ny-1
-    for (unsigned int j = 1; j < ny; ++j) {
-      double y = y0 + dy * j;
+    for (I j = 1; j < ny; ++j) {
+      auto y = y0 + dy * j;
       g += 4 * func(x, y);
     }
   }
   // i == nx
   {
-    double x = x1;
+    auto x = x1;
     //   j == 0 || j == ny
     g += func(x, y0) + func(x, y1);
     //   j = 1/2 ... ny-1/2
-    for (unsigned int j = 0; j < ny; ++j) {
-      double y = y0 + dy * (j + 0.5);
+    for (I j = 0; j < ny; ++j) {
+      auto y = y0 + dy * (2*j + 1) / 2;
       g += 4 * func(x, y);
     }
     //   j = 1 ... ny-1
-    for (unsigned int j = 1; j < ny; ++j) {
-      double y = y0 + dy * j;
+    for (I j = 1; j < ny; ++j) {
+      auto y = y0 + dy * j;
       g += 2 * func(x, y);
     }
   }

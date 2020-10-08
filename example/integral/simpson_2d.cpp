@@ -12,7 +12,7 @@ double func(double x, double y) { return std::sin(x) * std::sin(y); }
 int main() {
   std::cout << "# n value error\n";
   for (unsigned int n = 2; n <= 16; n += 2) {
-    double val = standards::simpson_2d(func, 0, 0, M_PI, M_PI, n, n);
+    double val = standards::simpson_2d(func, 0.0, 0.0, M_PI, M_PI, n, n);
     std::cout << n << ' ' << val << ' ' << (val - 4) << std::endl;
   }
 }
