@@ -8,17 +8,12 @@ include_directories(${PROJECT_SOURCE_DIR})
 
 # Google Test
 set(GOOGLETEST_VERSION 1)
-if(EXISTS googletest/include)
-  add_subdirectory(googletest)
-  include_directories(googletest/include)
-else(EXISTS googletest/googletest)
-  add_subdirectory(googletest/googletest)
-  include_directories(googletest/googletest/include)
-endif(EXISTS googletest/include)
-
-# IO Test
-include(add_iotest)
+add_subdirectory(googletest)
+include_directories(googletest/include)
 enable_testing()
+
+# IO Test (to be removed)
+include(add_iotest)
 
 add_subdirectory(standards)
 add_subdirectory(test)
