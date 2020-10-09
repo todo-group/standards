@@ -4,41 +4,42 @@
 
 * config: standard configuration for CMake
 
-* integral: numerical integration
+* numerical integration
 
-  * integral::simpson_1d - 1D Integration by Simpson rule
-  * integral::simpson_2d - 2D Integration by Simpson rule
+  * simpson_1d - 1D Integration by Simpson rule
+  * simpson_2d - 2D Integration by Simpson rule
 
-* lattice: simple lattices
+* log-sum-exp: basic arithmetic of huge (or tiny) numbers
 
-  * lattice::chain - 1D chain lattice
-  * lattice::square - 2D square lattice
-  * lattice::cubic - 3D simple cubic lattice
-  * lattice::fully_connected - (infinite-D) fully-connected lattice
-
-* lse: basic arithmetic of huge (or tiny) numbers based
-  on log-sum-exp technique
+  * exp_number
 
 * math: mathematical utilities
 
   * power2, power3, power4, power6 - integral power of 
     a variable
 
-* ode: initial value problem of ordinary differential equations
+* integrator: initial value problem of ordinary differential equations
 
-  * integrator::euler - Euler method
-  * integrator::rk2 - 2nd order Runge-Kutta method
-  * integrator::rk3 - 3nd order Runge-Kutta method
-  * integrator::rk4 - 4nd order Runge-Kutta method
+  * euler - Euler method
+  * rk2 - 2nd order Runge-Kutta method
+  * rk3 - 3nd order Runge-Kutta method
+  * rk4 - 4nd order Runge-Kutta method
 
-* optimize: optimization problem
+* optimization:
 
-  * optimize::bisection - find zero of 1D function by bisection method
-  * optimize::golden_section - find (local) minimum of 1D function by golden-secion method
-  * optimize::nelder_mead - find (local) minimum of arbitrary dimansional function by Nelder-Mead method
+  * bisection - find zero of 1D function by bisection method
+  * golden_section - find (local) minimum of 1D function by golden-secion method
+  * nelder_mead - find (local) minimum of arbitrary dimansional function by Nelder-Mead method
+  * newton - Newton-Raphson method for finding zero of 1D and higher-D functions
+  * mccormick - McCormick function
+  * rastrigin - Rastrigin function
 
-* stat: statics
+* statics
 
-  * stat::accumulator - estimate central moments and cumulants of random samples
+  * accumulator - estimate central moments and cumulants of random samples
+  * moment
+  * histogram - basic histogram
+  * bernoulli_distribution - Bernoulli distribution
+  * normal_distribution - Normal distribution
 
 * timer: a simple timer class (similar to boost.timer)
