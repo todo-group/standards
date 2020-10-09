@@ -8,8 +8,13 @@ include_directories(${PROJECT_SOURCE_DIR})
 
 # Google Test
 set(GOOGLETEST_VERSION 1)
-add_subdirectory(tool/googletest)
-include_directories(tools/googletest/include)
+if(EXISTS googletest/include)
+  add_subdirectory(googletest)
+  include_directories(googletest/include)
+else(EXISTS googletest/googletest)
+  add_subdirectory(googletest/googletest)
+  include_directories(googletest/googletest/include)
+endif(EXISTS googletest/include)
 
 # IO Test
 include(add_iotest)
