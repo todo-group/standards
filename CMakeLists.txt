@@ -12,9 +12,6 @@ add_subdirectory(googletest)
 include_directories(googletest/include)
 enable_testing()
 
-# IO Test (to be removed)
-include(add_iotest)
-
 add_subdirectory(standards)
 add_subdirectory(test)
 add_subdirectory(example)
