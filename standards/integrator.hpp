@@ -128,7 +128,6 @@ public:
   template<class F>
   void step(double t, double h, std::vector<double>& y, F const& f) const {
     const int  dim2 = dim_ / 2;
-    const double h2 = h * h;
     double c1 = 1.0/(4.0 - std::pow(2.0,4.0/3.0));  
     double c2 = (1.0 - std::pow(2.0,1.0/3.0))/(4.0 - std::pow(2.0,4.0/3.0));
     double b1 = 1.0 / (2.0 - std::pow(2.0,1.0/3.0));
