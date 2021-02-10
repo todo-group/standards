@@ -82,6 +82,8 @@ public:
     log_ = v;
     sign_ = is_positive;
   }
+  static self_ zero() { return self_(); }
+  static self_ unity() { return self_(value_type(1)); }
 
   operator value_type() const {
     if (sign_ == is_positive)
