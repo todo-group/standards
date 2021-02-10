@@ -21,8 +21,8 @@ TEST(ExpNumberTest, ExpNumber1) {
   double xd = 2;
   double yd = 3;
   
-  standards::exp_double x = xd;
-  standards::exp_double y = yd;
+  auto x = standards::exp_double(xd);
+  auto y = standards::exp_double(yd);
 
   EXPECT_DOUBLE_EQ(xd, x);
   EXPECT_DOUBLE_EQ(yd, y);
@@ -62,8 +62,8 @@ TEST(ExpNumberTest, ExpNumber2) {
   double ve = 10000;
   double we = 9999;
   
-  auto v = standards::exp_value(ve);
-  auto w = standards::exp_value(we);
+  auto v = standards::exp_double::exp(ve);
+  auto w = standards::exp_double::exp(we);
 
   EXPECT_DOUBLE_EQ(ve, log(v));
   EXPECT_DOUBLE_EQ(we, log(w));
@@ -89,9 +89,9 @@ TEST(ExpNumberTest, ExpNumber3) {
   double yd = 3;
   double pd = -2.5;
   
-  standards::exp_double x = xd;
-  standards::exp_double y = yd;
-  standards::exp_double p = pd;
+  auto x = standards::exp_double(xd);
+  auto y = standards::exp_double(yd);
+  auto p = standards::exp_double(pd);
 
   EXPECT_DOUBLE_EQ(pd, p);
   EXPECT_DOUBLE_EQ(-pd, -p);
@@ -125,5 +125,12 @@ TEST(ExpNumberTest, ExpNumber3) {
 TEST(ExpNumberTest, ExpNumber4) {
   EXPECT_DOUBLE_EQ(0.0, standards::exp_double::zero());
   EXPECT_DOUBLE_EQ(1.0, standards::exp_double::unity());
+  EXPECT_DOUBLE_EQ(1.0, standards::exp_double::exp(0.0));
+  EXPECT_DOUBLE_EQ(std::exp(1.5), standards::exp_double::exp(1.5));
+  EXPECT_DOUBLE_EQ(1.0, standards::exp_double::cosh(0.0));
+  EXPECT_DOUBLE_EQ(std::cosh(3.2), standards::exp_double::cosh(3.2));
+  EXPECT_DOUBLE_EQ(0.0, standards::exp_double::sinh(0.0));
+  EXPECT_DOUBLE_EQ(std::sinh(1.1), standards::exp_double::sinh(1.1));
+  EXPECT_DOUBLE_EQ(10000.0, log(standards::exp_double::exp(10000.0)));
 }
 
