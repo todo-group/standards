@@ -11,8 +11,8 @@ jobs:
     - name: checkout
       uses: actions/checkout@v2
       with:
-	fetch-depth: 0
-	submodules: true
+        fetch-depth: 0
+        submodules: true
     - name: cmake
       run: mkdir build && cd build && cmake -DCMAKE_CXX_FLAGS="-Wall -Werror" ..
     - name: make
