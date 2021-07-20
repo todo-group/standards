@@ -1,15 +1,15 @@
-cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.4)
 project(standards NONE)
 
-list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/config)
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 include(core)
 
 include_directories(${PROJECT_SOURCE_DIR})
 
 # Google Test
-set(GOOGLETEST_VERSION 1)
-add_subdirectory(googletest)
-include_directories(googletest/include)
+set(GOOGLETEST_VERSION 1.11.0)
+add_subdirectory(googletest/googletest)
+include_directories(googletest/googletest/include)
 enable_testing()
 
 add_subdirectory(standards)
