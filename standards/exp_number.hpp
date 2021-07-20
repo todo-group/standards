@@ -97,7 +97,8 @@ public:
     return res;
   }
 
-  bool operator>(int v) const { return this->operator>(static_cast<value_type>(v)); }
+  template<typename U>
+  bool operator>(U v) const { return this->operator>(static_cast<value_type>(v)); }
   bool operator>(value_type v) const {
     if (v >= 0)
       return (sign_ == is_positive) ? (log_ > std::log(v)) : false;
@@ -114,7 +115,8 @@ public:
       return (sign_ == is_positive);
   }
 
-  bool operator==(int v) const { return this->operator==(static_cast<value_type>(v)); }
+  template<typename U>
+  bool operator==(U v) const { return this->operator==(static_cast<value_type>(v)); }
   bool operator==(value_type v) const {
     if (v > 0)
       return (sign_ == is_positive) ? (log_ == std::log(v)) : false;
@@ -133,7 +135,8 @@ public:
       return (sign_ == is_zero);
   }
 
-  self_& operator+=(int v) { return operator+=(static_cast<value_type>(v)); }
+  template<typename U>
+  self_& operator+=(U v) { return operator+=(static_cast<value_type>(v)); }
   self_& operator+=(value_type v) { return operator+=(self_(v)); }
   template<typename U>
   self_& operator+=(exp_number<U> const& rhs) {
@@ -177,12 +180,14 @@ public:
     return *this;
   }
 
-  self_& operator-=(int v) { return this->operator+=(-v); }
+  template<typename U>
+  self_& operator-=(U v) { return this->operator+=(-v); }
   self_& operator-=(value_type v) { return this->operator+=(-v); }
   template<typename U>
   self_& operator-=(exp_number<U> const& rhs) { return this->operator+=(-rhs); }
 
-  self_& operator*=(int v) { return this->operator*=(self_(v)); }
+  template<typename U>
+  self_& operator*=(U v) { return this->operator*=(self_(v)); }
   self_& operator*=(value_type v) { return this->operator*=(self_(v)); }
   self_& operator*=(self_ const& rhs) {
     log_ += rhs.log_;
@@ -191,7 +196,8 @@ public:
     return *this;
   }
 
-  self_& operator/=(int v) { return this->operator/=(self_(v)); }
+  template<typename U>
+  self_& operator/=(U v) { return this->operator/=(self_(v)); }
   self_& operator/=(value_type v) { return this->operator/=(self_(v)); }
   self_& operator/=(self_ const& rhs) {
     if (sign_ != is_zero) {
@@ -223,17 +229,12 @@ T log(exp_number<T> const& x) {
 template<typename T>
 exp_number<T> exp(exp_number<T> const& x) {
   exp_number<T> res;
-  res.set_log(static_cast<double>(x));
+  res.set_log(static_cast<T>(x));
   return res;
 }
 
-template<typename T>
-exp_number<T> pow(exp_number<T> const& x, int p) {
-  return x.pow(p);
-}
-
-template<typename T>
-exp_number<T> pow(exp_number<T> const& x, double p) {
+template<typename T, typename U>
+exp_number<T> pow(exp_number<T> const& x, U p) {
   return x.pow(p);
 }
 
