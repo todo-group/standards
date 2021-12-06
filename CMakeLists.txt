@@ -7,10 +7,10 @@ option(STANDARDS_INSTALL "Install standards." ON)
 option(STANDARDS_BUILD_TESTS "Build all standards' tests." ON)
 option(STANDARDS_BUILD_EXAMPLES "Build all standards' examples." ON)
 
+include_directories(${PROJECT_SOURCE_DIR})
+
 include(googletest)
 FetchContent_MakeAvailable(googletest)
-
-include_directories(${PROJECT_SOURCE_DIR})
 
 if(STANDARDS_INSTALL)
   add_subdirectory(standards)
