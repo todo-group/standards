@@ -1,16 +1,15 @@
-cmake_minimum_required(VERSION 3.4)
+cmake_minimum_required(VERSION 3.14)
 project(standards NONE)
 
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 include(core)
 
-include_directories(${PROJECT_SOURCE_DIR})
+# dependencies
+include(googletest)
+FetchContent_MakeAvailable(googletest)
 
-# Google Test
-set(GOOGLETEST_VERSION 1.11.0)
-add_subdirectory(googletest/googletest)
-include_directories(googletest/googletest/include)
 enable_testing()
+include_directories(${PROJECT_SOURCE_DIR})
 
 add_subdirectory(standards)
 add_subdirectory(test)
