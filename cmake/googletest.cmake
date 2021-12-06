@@ -1,3 +1,6 @@
+option(BUILD_GMOCK OFF)
+option(INSTALL_GTEST OFF)
+
 include(FetchContent)
 FetchContent_Declare(
   googletest
