@@ -8,7 +8,7 @@ option(STANDARDS_BUILD_EXAMPLES "Build all standards' examples." ON)
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 include(core)
 
-include_directories(${PROJECT_SOURCE_DIR})
+include_directories(${standards_SOURCE_DIR})
 enable_testing()
 
 include(googletest)
