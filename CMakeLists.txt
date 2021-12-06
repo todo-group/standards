@@ -1,18 +1,16 @@
 cmake_minimum_required(VERSION 3.14)
-project(standards NONE)
+include(cmake/prefix.cmake)
+project(standards CXX)
+include(cmake/postfix.cmake)
 
 option(STANDARDS_INSTALL "Install standards." ON)
 option(STANDARDS_BUILD_TESTS "Build all standards' tests." ON)
 option(STANDARDS_BUILD_EXAMPLES "Build all standards' examples." ON)
 
-list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
-include(core)
-
-include_directories(${standards_SOURCE_DIR})
-enable_testing()
-
 include(googletest)
 FetchContent_MakeAvailable(googletest)
+
+include_directories(${PROJECT_SOURCE_DIR})
 
 if(STANDARDS_INSTALL)
   add_subdirectory(standards)
