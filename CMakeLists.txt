@@ -10,7 +10,7 @@ option(STANDARDS_BUILD_EXAMPLES "Build all standards' examples." ON)
 include_directories(${PROJECT_SOURCE_DIR})
 
 include(googletest)
-FetchContent_MakeAvailable(googletest)
+FetchContent_MakeAvailable(${FetchContents})
 
 if(STANDARDS_INSTALL)
   add_subdirectory(standards)
