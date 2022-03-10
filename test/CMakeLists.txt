@@ -3,6 +3,7 @@ set(PROGS
   simpson
   exp_number power
   bisection golden_section nelder_mead newton
+  robbins_monro polyak_ruppert
 )
 foreach(name ${PROGS})
   set(target_name test_${name})
