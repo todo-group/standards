@@ -1,5 +1,6 @@
 set(PROGS normal_distribution bernoulli_distribution vector)
 foreach(name ${PROGS})
   add_executable(${name} ${name}.cpp)
+  target_link_libraries(${name} standards)
   add_test(${name} ${name})
 endforeach(name)
